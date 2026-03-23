@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>预览 · 主页</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+.phone{width:390px;height:772px;position:relative;overflow:hidden;background:#1a1a1a}
+.bg{position:absolute;inset:0;z-index:0}
+.bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.bg img.on{opacity:1;z-index:1}
+.cal{position:absolute;top:0;left:0;right:0;z-index:10;background:rgba(12,6,0,.95);padding:16px;border-bottom:4px solid #1a0a00}
+.cal-top{display:flex;justify-content:space-between;margin-bottom:12px;font-size:20px;font-weight:700;color:#f5c842}
+.cal-sub{font-size:16px;color:#f5deb3}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px;font-size:14px;color:#d4b483;text-align:center}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.day{min-height:40px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#f5deb3;background:rgba(0,0,0,.3);border:2px solid rgba(26,10,0,.5)}
+.day.empty{background:transparent;border-color:transparent}
+.day.today{background:#e8708a;color:#fff;font-size:20px}
+.btns{position:absolute;bottom:20px;left:12px;right:12px;display:flex;justify-content:center;gap:10px;z-index:10}
+.btns button{font-size:16px;padding:14px 18px;background:rgba(45,30,18,.95);color:#f5deb3;border:3px solid #1a0a00;cursor:pointer}
+.btns button.on{background:#f5c842;color:#1a0a00}
+.badge{position:absolute;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:10px 14px;font-size:14px;z-index:999;border-radius:6px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="badge">✓ 预览页 · 无缓存</div>
+  <div class="bg" id="bg">
+    <img class="on" src="images/home1.png" alt="">
+    <img src="images/home2.png" alt="">
+    <img src="images/home3.png" alt="">
+    <img src="images/home4.png" alt="">
+  </div>
+  <div class="cal">
+    <div class="cal-top">
+      <span id="m">—</span>
+      <span class="cal-sub" id="d">—</span>
+    </div>
+    <div class="cal-dow"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+    <div class="cal-days" id="grid"></div>
+  </div>
+  <div class="btns">
+    <button class="on" onclick="set(1)">HOME 1</button>
+    <button onclick="set(2)">HOME 2</button>
+    <button onclick="set(3)">HOME 3</button>
+    <button onclick="set(4)">HOME 4</button>
+  </div>
+</div>
+<script>
+var M=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+var W=['周日','周一','周二','周三','周四','周五','周六'];
+function render(){
+  var n=new Date(),y=n.getFullYear(),m=n.getMonth();
+  document.getElementById('m').textContent=y+'年 '+M[m];
+  document.getElementById('d').textContent=W[n.getDay()]+' · 今日 '+n.getDate()+' 日';
+  var first=new Date(y,m,1),pad=first.getDay(),dim=new Date(y,m+1,0).getDate();
+  var g=document.getElementById('grid');g.innerHTML='';
+  for(var i=0;i<pad;i++){var e=document.createElement('div');e.className='day empty';g.appendChild(e)}
+  for(var i=1;i<=dim;i++){
+    var c=document.createElement('div');c.className='day';
+    if(i===n.getDate()&&m===n.getMonth()&&y===n.getFullYear())c.classList.add('today');
+    c.textContent=i;g.appendChild(c);
+  }
+}
+function set(n){
+  document.querySelectorAll('#bg img').forEach(function(img,i){img.classList.toggle('on',i===n-1)});
+  document.querySelectorAll('.btns button').forEach(function(b,i){b.classList.toggle('on',i===n-1)});
+}
+render();
+</script>
+</body>
+</html>
