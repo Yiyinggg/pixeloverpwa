@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>主页调试</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #111; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.phone { width: 390px; height: 772px; position: relative; overflow: hidden; background: #1a1a1a; }
+.bg { position: absolute; inset: 0; }
+.bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.bg img.active { opacity: 1; z-index: 1; }
+.panel { position: absolute; top: 0; left: 0; right: 0; padding: 12px; background: rgba(0,0,0,.7); color: #f5c842; font-family: monospace; font-size: 11px; z-index: 10; }
+.btns { position: absolute; bottom: 20px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 10; }
+.btns button { padding: 10px 14px; font-size: 11px; cursor: pointer; background: #333; color: #fff; border: 2px solid #666; }
+.btns button.active { background: #f5c842; color: #000; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="bg" id="bg">
+    <img class="active" src="images/home1.png" alt="" data-n="1">
+    <img src="images/home2.png" alt="" data-n="2">
+    <img src="images/home3.png" alt="" data-n="3">
+    <img src="images/home4.png" alt="" data-n="4">
+  </div>
+  <div class="panel">若能看到背景图，说明结构可行。点下方切换。</div>
+  <div class="btns">
+    <button class="active" data-n="1" onclick="set(1)">1</button>
+    <button data-n="2" onclick="set(2)">2</button>
+    <button data-n="3" onclick="set(3)">3</button>
+    <button data-n="4" onclick="set(4)">4</button>
+  </div>
+</div>
+<script>
+function set(n) {
+  document.querySelectorAll('#bg img').forEach(function(img) {
+    img.classList.toggle('active', parseInt(img.dataset.n) === n);
+  });
+  document.querySelectorAll('.btns button').forEach(function(b) {
+    b.classList.toggle('active', parseInt(b.dataset.n) === n);
+  });
+}
+</script>
+</body>
+</html>

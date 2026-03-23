@@ -1,0 +1,9 @@
+name: pixel-love-pwa
+static_sites:
+  - name: pixel-love-pwa
+    source_dir: /
+    output_dir: /
+    index_document: index.html
+    error_document: index.html
+    routes:
+      - path: /

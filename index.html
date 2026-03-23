@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#1e120a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<title>US · Our Pixel World</title>
+<meta name="version" content="10">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css?v=10">
+<style>
+/* 内联样式，绕过缓存：主页日历+按钮字体放大 */
+.home-cal-month { font-size: 11px !important; }
+.home-cal-sub { font-size: 8px !important; }
+.home-cal-dow span { font-size: 7px !important; }
+.home-day { font-size: 9px !important; min-height: 28px !important; }
+.home-day.home-day-today { font-size: 10px !important; }
+.home-state-btn { font-size: 9px !important; padding: 12px !important; }
+.home-tool { font-size: 8px !important; }
+.home-tool-heart { font-size: 18px !important; }
+.mtst { font-size: 10px !important; }
+</style>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<div class="phone">
+
+  <!-- 背景层：与屏幕同级，在 .phone 下铺满内容区 -->
+  <div class="phone-bg" id="phone-home-bg" aria-hidden="true">
+    <img class="phone-bg-img active" src="images/home1.png" alt="" data-state="1">
+    <img class="phone-bg-img" src="images/home2.png" alt="" data-state="2">
+    <img class="phone-bg-img" src="images/home3.png" alt="" data-state="3">
+    <img class="phone-bg-img" src="images/home4.png" alt="" data-state="4">
+  </div>
+
+<div class="screen active" id="s-home" data-home-state="1">
+
+  <header class="home-cal-panel">
+    <div class="home-cal-panel-top">
+      <span class="home-cal-month" id="cal-month-label">—</span>
+      <span class="home-cal-sub" id="hud-date">—</span>
+    </div>
+    <div class="home-cal-dow">
+      <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+    </div>
+    <div class="home-cal-days" id="cal-grid"></div>
+  </header>
+
+  <div class="mtst" id="mtst">💌 SENDING MISS YOU…</div>
+
+  <div class="home-toolbar">
+    <button type="button" class="home-tool" onclick="switchTo('s-map')" title="地图">MAP</button>
+    <button type="button" class="home-tool" onclick="switchTo('s-bottle')" title="漂流瓶">BTL</button>
+    <button type="button" class="home-tool home-tool-heart" id="hbtn" onclick="sendMiss()" title="想念">♥</button>
+  </div>
+
+  <nav class="home-state-nav" aria-label="主页背景">
+    <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)">HOME 1</button>
+    <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)">HOME 2</button>
+    <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)">HOME 3</button>
+    <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)">HOME 4</button>
+  </nav>
+
+</div><!-- /s-home -->
+
+
+<!-- ══════════════════════════════════
+     MAP — REAL LEAFLET MAP
+     Stamen Toner tiles = pixel game look
+══════════════════════════════════ -->
+<div class="screen" id="s-map">
+
+  <div class="mhud">
+    <div class="mhud-t">🗺 THE PIXEL ATLAS</div>
+    <div class="mhud-m" id="mmode">OSM · PIXEL STYLE · TAP + TO MARK</div>
+    <button type="button" class="mhud-loc" onclick="mapLocateMe()" title="定位到我">⌖</button>
+  </div>
+
+  <div class="msrch">
+    <input id="srch" placeholder="SEARCH A PLACE…" maxlength="80">
+    <button onclick="doSearch()">GO ▶</button>
+  </div>
+
+  <!-- Leaflet renders here -->
+  <div id="leaflet-map"></div>
+
+  <!-- Stats -->
+  <div class="mstats">
+    <div class="msr"><div class="msd" style="background:var(--pp)"></div><span id="c-pp">MY: 0</span></div>
+    <div class="msr"><div class="msd" style="background:var(--bp)"></div><span id="c-bp">HIS: 0</span></div>
+    <div class="msr"><div class="msd" style="background:var(--gp)"></div><span id="c-gp">PLAN: 0</span></div>
+    <div class="msr"><div class="msd" style="background:var(--pk)"></div><span id="c-pk">DONE: 0</span></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="mleg">
+    <div class="mlr"><div class="mld" style="background:var(--pp)"></div>MY PAST</div>
+    <div class="mlr"><div class="mld" style="background:var(--bp)"></div>HIS PAST</div>
+    <div class="mlr"><div class="mld" style="background:var(--gp)"></div>PLANNED</div>
+    <div class="mlr"><div class="mld" style="background:var(--pk)"></div>TOGETHER ♥</div>
+  </div>
+
+  <!-- Add pin -->
+  <div class="addbtn" id="addbtn" onclick="toggleAdd()">+</div>
+
+  <!-- Add panel -->
+  <div class="amp" id="amp">
+    <div class="amp-ttl">📍 NEW MARK</div>
+    <div class="amp-loc" id="amp-loc">TAP ON THE MAP TO PLACE PIN</div>
+    <div class="amp-row">
+      <div class="amp-lbl">TYPE</div>
+      <select class="amp-sel" id="amp-type">
+        <option value="purple">MY PAST VISIT</option>
+        <option value="blue">HIS PAST VISIT</option>
+        <option value="green">PLANNED TRIP ✈</option>
+        <option value="pink">TOGETHER ♥</option>
+      </select>
+    </div>
+    <div class="amp-row">
+      <div class="amp-lbl">NOTE</div>
+      <input class="amp-inp" id="amp-note" placeholder="ADD A MEMORY…">
+    </div>
+    <div class="amp-btns">
+      <button class="amp-save" onclick="savePin()">SAVE ✓</button>
+      <button class="amp-cancel" onclick="cancelAdd()">CANCEL</button>
+    </div>
+  </div>
+
+  <div id="mtoast">MSG</div>
+
+</div><!-- /s-map -->
+
+
+<!-- ══════════════════════════════════
+     BOTTLE — THE PIXEL BEACH
+══════════════════════════════════ -->
+<div class="screen" id="s-bottle">
+
+  <div class="bhud">
+    <div class="bhud-t">🍾 THE PIXEL BEACH</div>
+    <div class="bhud-s">1 BOTTLE WAITING</div>
+  </div>
+
+  <div class="bsky">
+    <div class="bstr" style="top:20px;left:40px;animation-delay:-.5s"></div>
+    <div class="bstr" style="top:35px;left:100px;animation-delay:-1s"></div>
+    <div class="bstr" style="top:15px;left:160px;animation-delay:-1.5s"></div>
+    <div class="bstr" style="top:45px;left:230px;animation-delay:-.8s"></div>
+    <div class="bstr" style="top:10px;left:290px;animation-delay:-.3s"></div>
+    <div class="moon"></div>
+  </div>
+
+  <div class="bocean">
+    <div class="bwave w1">
+      <svg viewBox="0 0 430 100" preserveAspectRatio="none">
+        <path d="M0 50 Q54 20 108 50 Q162 80 216 50 Q270 20 324 50 Q378 80 432 50 L432 100 L0 100Z" fill="#2a5aa0" opacity=".8"/>
+        <path d="M0 60 Q54 30 108 60 Q162 90 216 60 Q270 30 324 60 Q378 90 432 60 L432 100 L0 100Z" fill="#1e3a7a" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="bwave w2" style="top:10px">
+      <svg viewBox="0 0 430 100" preserveAspectRatio="none">
+        <path d="M0 55 Q54 25 108 55 Q162 85 216 55 Q270 25 324 55 Q378 85 432 55 L432 100 L0 100Z" fill="#4a8ac8" opacity=".3"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="bsand"></div>
+
+  <div class="dind">✉ LATEST: 8H AGO<br><span>⏱ OPENS IN: 16H 23M</span></div>
+
+  <div class="bwrap" id="bwrap" onclick="openBottle()">
+    <div class="btl">
+      <div class="btl-cork"></div>
+      <div class="btl-neck"></div>
+      <div class="btl-body">
+        <div class="btl-hl"></div>
+        <div class="btl-scr">📜</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="thint">[ TAP BOTTLE TO OPEN ]</div>
+
+  <div class="btabs">
+    <button class="btab active" onclick="setTab(0,this)">INBOX (1)</button>
+    <button class="btab" onclick="setTab(1,this)">WRITE</button>
+    <button class="btab" onclick="setTab(2,this)">SENT</button>
+  </div>
+
+  <!-- Write panel -->
+  <div class="wpanel" id="wpanel">
+    <div class="wphd">
+      <div class="wphd-t">✍ WRITE A MESSAGE</div>
+      <button style="background:#c84a4a;color:#fff;font-family:var(--F);font-size:6px;border:3px solid var(--ib);padding:5px 8px;cursor:pointer" onclick="closeWrite()">CLOSE</button>
+    </div>
+    <div class="parch">
+      <textarea id="btxt" placeholder="DEAR ___,&#10;&#10;TODAY I THOUGHT OF YOU…"></textarea>
+    </div>
+    <div style="padding:5px 14px;font-size:5px;color:#8a6040;background:rgba(245,232,192,.5)">
+      ♥ ARRIVES IN: <span style="color:var(--rose)" id="dft">~14 HOURS</span> (RANDOM 1–24H)
+    </div>
+    <div class="wpft">
+      <button class="mbtn" id="mbtn" onclick="toggleMusic()"><span>📼</span> ATTACH SONG</button>
+      <button class="sbtn" onclick="sendBottle()">THROW 🍾</button>
+    </div>
+  </div>
+
+  <!-- Receive overlay -->
+  <div class="rpanel" id="rpanel">
+    <div class="letter">
+      <div class="l-hd">💌 BOTTLE FROM TOKYO · 14H AGO</div>
+      <div class="l-bd">
+        DEAR YOU,<br><br>
+        IT SNOWED HERE TODAY.<br>
+        I WATCHED FROM THE WINDOW<br>
+        AND PRETENDED YOU WERE<br>
+        SITTING NEXT TO ME.<br><br>
+        47 DAYS. I LOVE YOU.
+      </div>
+      <div class="l-mu">
+        <div class="l-mu-i">📼</div>
+        <div class="l-mu-t">ATTACHED: "FIRST LOVE"<br>HIKARU UTADA</div>
+        <button class="l-mu-p">▶</button>
+      </div>
+    </div>
+    <button class="rcls" onclick="closeRecv()">[ CLOSE BOTTLE ]</button>
+  </div>
+
+</div><!-- /s-bottle -->
+
+
+<!-- ══════════════════════════════════
+     BOTTOM NAVIGATION
+══════════════════════════════════ -->
+<nav class="bnav">
+  <button class="nbtn active" id="nb-home" onclick="switchTo('s-home')">
+    <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center">
+      <div class="ni-house">
+        <div class="ni-roof"></div>
+        <div class="ni-body"><div class="ni-door"></div></div>
+      </div>
+    </div>
+    <div class="nlbl">HOME</div>
+  </button>
+
+  <button class="nbtn" id="nb-map" onclick="switchTo('s-map')">
+    <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center">
+      <div class="ni-globe">
+        <div class="ni-land" style="width:10px;height:6px;top:6px;left:4px"></div>
+        <div class="ni-land" style="width:8px;height:5px;top:13px;left:10px"></div>
+      </div>
+    </div>
+    <div class="nlbl">MAP</div>
+  </button>
+
+  <button class="nbtn" id="nb-btl" onclick="switchTo('s-bottle')">
+    <div style="width:32px;height:32px;position:relative;display:flex;align-items:center;justify-content:center">
+      <div class="ni-btl">
+        <div class="ni-cork"></div>
+        <div class="ni-neck"></div>
+        <div class="ni-bdy"></div>
+      </div>
+      <div class="nbadge">1</div>
+    </div>
+    <div class="nlbl">BOTTLE</div>
+  </button>
+</nav>
+
+<div id="gtst">MSG</div>
+
+</div><!-- .phone -->
+
+<!-- Scripts: Leaflet → map module → app -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="map.js?v=7"></script>
+<script src="app.js?v=7"></script>
+</body>
+</html>
