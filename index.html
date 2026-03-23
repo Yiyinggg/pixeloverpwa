@@ -9,7 +9,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <title>US · Our Pixel World</title>
-<meta name="version" content="14">
+<meta name="version" content="17">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css" id="main-css">
 <script>
@@ -19,16 +19,44 @@
 })();
 </script>
 <style>
-/* 主页字体放大 v11 */
-.home-cal-month { font-size: 15px !important; }
-.home-cal-sub { font-size: 12px !important; }
-.home-cal-dow span { font-size: 11px !important; }
-.home-day { font-size: 13px !important; min-height: 32px !important; }
-.home-day.home-day-today { font-size: 14px !important; }
-.home-state-btn { font-size: 12px !important; padding: 14px 16px !important; }
-.home-tool { font-size: 12px !important; }
-.home-tool-heart { font-size: 24px !important; padding: 16px 20px !important; }
-.mtst { font-size: 14px !important; }
+/* 字体放大 v2 */
+.home-state-btn { font-size: 10px !important; padding: 10px 12px !important; }
+.home-tool { font-size: 16px !important; }
+.home-tool-heart { font-size: 32px !important; padding: 18px 24px !important; }
+.mtst { font-size: 20px !important; }
+.px-cal-head span { font-size: 12px !important; }
+.px-cal-day { font-size: 42px !important; }
+.mhud-t { font-size: 11px !important; }
+.mhud-m { font-size: 8px !important; }
+.msrch input { font-size: 10px !important; padding: 10px 12px !important; }
+.msrch button { font-size: 10px !important; padding: 10px 12px !important; }
+.mstats .msr, .mleg .mlr { font-size: 8px !important; }
+.addbtn { font-size: 26px !important; }
+.amp-ttl { font-size: 11px !important; }
+.amp-loc, .amp-lbl, .amp-sel, .amp-inp { font-size: 9px !important; }
+.amp-save, .amp-cancel { font-size: 10px !important; }
+.bhud-t { font-size: 11px !important; }
+.bhud-s { font-size: 9px !important; }
+.dind { font-size: 9px !important; padding: 10px 16px !important; }
+.thint { font-size: 10px !important; }
+.btab { font-size: 9px !important; padding: 14px 6px !important; }
+.wphd-t { font-size: 10px !important; }
+.parch textarea { font-size: 10px !important; line-height: 1.8 !important; }
+.mbtn, .sbtn { font-size: 9px !important; padding: 8px 12px !important; }
+.l-hd { font-size: 10px !important; }
+.l-bd { font-size: 10px !important; line-height: 2.2 !important; }
+.l-mu-t { font-size: 8px !important; }
+.l-mu-p, .rcls { font-size: 10px !important; }
+.nlbl { font-size: 8px !important; }
+.nbadge { font-size: 7px !important; }
+#mtoast, #gtst { font-size: 10px !important; padding: 10px 16px !important; }
+/* 状态按钮图标与文字（内联防缓存） */
+.home-state-btn { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 4px !important; }
+.home-state-icon { width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important; background-size: contain !important; background-position: center !important; background-repeat: no-repeat !important; }
+.home-icon-forest { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%231a5a1a' d='M10 2 L12 8 L10 8 L12 14 L10 14 L8 8 L6 8 Z'/%3E%3Crect x='8' y='14' width='4' height='4' fill='%235a3020'/%3E%3Crect x='4' y='16' width='3' height='2' fill='%231a5a1a'/%3E%3Crect x='13' y='16' width='3' height='2' fill='%231a5a1a'/%3E%3C/svg%3E") !important; }
+.home-icon-grass { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect y='12' width='20' height='8' fill='%233a8a3a'/%3E%3Cpath fill='%2372c472' d='M2 12 L4 6 L2 12 M6 12 L8 8 L6 12 M10 12 L12 4 L10 12 M14 12 L16 8 L14 12 M18 12 L20 6 L18 12'/%3E%3C/svg%3E") !important; }
+.home-icon-seaside { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect y='14' width='20' height='6' fill='%23f5d890'/%3E%3Cpath fill='%232a5aa0' d='M0 10 Q5 8 10 10 Q15 12 20 10 L20 20 L0 20 Z' opacity='.9'/%3E%3Cpath fill='%234a8ac8' d='M0 12 Q5 10 10 12 Q15 14 20 12 L20 20 L0 20 Z' opacity='.6'/%3E%3Ccircle cx='16' cy='6' r='3' fill='%23f5c842'/%3E%3C/svg%3E") !important; }
+.home-icon-indoor { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23c8a87a' d='M10 2 L2 10 L4 10 L4 18 L16 18 L16 10 L18 10 Z'/%3E%3Crect x='8' y='12' width='4' height='6' fill='%235a3020'/%3E%3Crect x='2' y='10' width='2' height='8' fill='%238a704a'/%3E%3Crect x='16' y='10' width='2' height='8' fill='%238a704a'/%3E%3C/svg%3E") !important; }
 </style>
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -41,35 +69,48 @@
     <img class="phone-bg-img active" src="images/home1.png" alt="" data-state="1">
     <img class="phone-bg-img" src="images/home2.png" alt="" data-state="2">
     <img class="phone-bg-img" src="images/home3.png" alt="" data-state="3">
-    <img class="phone-bg-img" src="images/home4.png" alt="" data-state="4">
+    <img class="phone-bg-img" src="images/home4-indoor-placeholder.svg" alt="" data-state="4">
+  </div>
+
+  <!-- 日历：作为 .phone 直接子元素，仅 HOME 时显示 -->
+  <div class="px-cal-wrap px-cal-home-only cal-on-home" id="home-px-cal">
+    <div class="px-cal">
+      <div class="px-cal-rings"><span></span><span></span><span></span><span></span></div>
+      <div class="px-cal-head"><span id="cal-month-abbr">—</span></div>
+      <div class="px-cal-body">
+        <span class="px-cal-day" id="cal-day-n">—</span>
+        <div class="px-cal-curl" aria-hidden="true"></div>
+      </div>
+    </div>
   </div>
 
 <div class="screen active" id="s-home" data-home-state="1">
 
-  <header class="home-cal-panel" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
-    <div class="home-cal-panel-top">
-      <span class="home-cal-month" id="cal-month-label" style="font-size:22px;font-weight:700">—</span>
-      <span class="home-cal-sub" id="hud-date" style="font-size:16px">—</span>
-    </div>
-    <div class="home-cal-dow" style="font-size:14px">
-      <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
-    </div>
-    <div class="home-cal-days" id="cal-grid"></div>
-  </header>
-
-  <div class="mtst" id="mtst" style="font-size:18px;font-family:-apple-system,sans-serif">💌 SENDING MISS YOU…</div>
+  <div class="mtst" id="mtst" style="font-family:-apple-system,sans-serif">💌 SENDING MISS YOU…</div>
 
   <div class="home-toolbar" style="font-family:-apple-system,sans-serif">
-    <button type="button" class="home-tool" onclick="switchTo('s-map')" title="地图" style="font-size:16px">MAP</button>
-    <button type="button" class="home-tool" onclick="switchTo('s-bottle')" title="漂流瓶" style="font-size:16px">BTL</button>
-    <button type="button" class="home-tool home-tool-heart" id="hbtn" onclick="sendMiss()" title="想念" style="font-size:32px">♥</button>
+    <button type="button" class="home-tool" onclick="switchTo('s-map')" title="地图">MAP</button>
+    <button type="button" class="home-tool" onclick="switchTo('s-bottle')" title="漂流瓶">BTL</button>
+    <button type="button" class="home-tool home-tool-heart" id="hbtn" onclick="sendMiss()" title="想念">♥</button>
   </div>
 
-  <nav class="home-state-nav" aria-label="主页背景" style="font-family:-apple-system,sans-serif">
-    <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)" style="font-size:16px">HOME 1</button>
-    <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)" style="font-size:16px">HOME 2</button>
-    <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)" style="font-size:16px">HOME 3</button>
-    <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)" style="font-size:16px">HOME 4</button>
+  <nav class="home-state-nav" aria-label="主页背景">
+    <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)" title="森林">
+      <span class="home-state-icon home-icon-forest"></span>
+      <span class="home-state-label">森林</span>
+    </button>
+    <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)" title="草地">
+      <span class="home-state-icon home-icon-grass"></span>
+      <span class="home-state-label">草地</span>
+    </button>
+    <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)" title="海边">
+      <span class="home-state-icon home-icon-seaside"></span>
+      <span class="home-state-label">海边</span>
+    </button>
+    <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)" title="室内">
+      <span class="home-state-icon home-icon-indoor"></span>
+      <span class="home-state-label">室内</span>
+    </button>
   </nav>
 
 </div><!-- /s-home -->
@@ -281,16 +322,26 @@
 
 </div><!-- .phone -->
 
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v22</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
   var b=document.getElementById('fresh-badge');
-  if(b){ b.textContent='已更新 v14 系统字体+大字号'; b.style.opacity='1'; setTimeout(function(){ b.style.opacity='0'; },2500); }
+  if(b){ b.textContent='已更新 v22'; b.style.opacity='1'; setTimeout(function(){ b.style.opacity='0'; },3000); }
 })();
 </script>
 <!-- Scripts: Leaflet → map module → app -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="map.js?v=11"></script>
-<script src="app.js?v=11"></script>
+<script>
+(function(){
+  var v='?v='+Date.now();
+  function load(src,next){
+    var e=document.createElement('script');e.src=src+v;
+    if(next)e.onload=function(){load(next,null);};
+    document.body.appendChild(e);
+  }
+  load('map.js','app.js');
+})();
+</script>
 </body>
 </html>

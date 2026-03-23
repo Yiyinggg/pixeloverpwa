@@ -1,5 +1,5 @@
 /* 网络优先：刷新即可拿到最新 HTML/JS/CSS/图片；离线时再用缓存 */
-const CACHE = 'pixel-love-v5-netfirst';
+const CACHE = 'pixel-love-v7-netfirst';
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
@@ -32,16 +32,18 @@ self.addEventListener('fetch', (e) => {
 
   if (req.method !== 'GET') return;
 
+  const p = url.pathname;
+  if (p === '/' || p.endsWith('/index.html') || p.endsWith('.html')) {
+    e.respondWith(fetch(req).catch(() => caches.match(req)));
+    return;
+  }
+
   e.respondWith(
     fetch(req)
       .then((res) => {
         if (!res || !res.ok) return res;
         const clone = res.clone();
-        const p = url.pathname;
         if (
-          p === '/' ||
-          p.endsWith('/index.html') ||
-          p.endsWith('.html') ||
           p.endsWith('.js') ||
           p.endsWith('.css') ||
           p.endsWith('.json') ||

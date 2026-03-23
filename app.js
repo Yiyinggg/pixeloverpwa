@@ -16,6 +16,8 @@ window.switchTo = function(id) {
   ['s-home', 's-map', 's-bottle'].forEach(function(sid, i) {
     document.getElementById(['nb-home', 'nb-map', 'nb-btl'][i]).classList.toggle('active', sid === id);
   });
+  var cal = document.getElementById('home-px-cal');
+  if (cal) cal.classList.toggle('cal-on-home', id === 's-home');
   if (id === 's-map') {
     if (!mapReady) { mapReady = true; }
     initLeaflet();
@@ -36,10 +38,10 @@ var HOME_BG_FILES = [
   'images/home1.png',
   'images/home2.png',
   'images/home3.png',
-  'images/home4.png'
+  'images/home4-indoor-placeholder.svg'
 ];
 
-var HOME_LABELS = ['HOME 1', 'HOME 2', 'HOME 3', 'HOME 4'];
+var HOME_LABELS = ['森林', '草地', '海边', '室内'];
 
 /** 换素材后改成 2、3… 即可让浏览器重新拉图片 */
 var HOME_ASSET_V = '2';
@@ -57,7 +59,7 @@ function homeBgUrl(n) {
 }
 
 function applyHomeLabels() {
-  var btns = document.querySelectorAll('#s-home .home-state-btn');
+  var btns = document.querySelectorAll('#s-home .home-state-btn .home-state-label');
   for (var i = 0; i < btns.length; i++) {
     if (HOME_LABELS[i]) btns[i].textContent = HOME_LABELS[i];
   }
@@ -82,42 +84,19 @@ window.setHomeState = function(n) {
 
 function renderHomeCalendar() {
   var now = new Date();
-  var y = now.getFullYear();
-  var m = now.getMonth();
-  var monsZh = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
-  document.getElementById('cal-month-label').textContent = y + '年 ' + monsZh[m];
-  var first = new Date(y, m, 1);
-  var startPad = first.getDay();
-  var dim = new Date(y, m + 1, 0).getDate();
-  var grid = document.getElementById('cal-grid');
-  grid.innerHTML = '';
-  var i;
-  for (i = 0; i < startPad; i++) {
-    var empty = document.createElement('div');
-    empty.className = 'home-day home-day-empty';
-    empty.style.minHeight = '38px';
-    grid.appendChild(empty);
-  }
-  for (i = 1; i <= dim; i++) {
-    var cell = document.createElement('div');
-    cell.className = 'home-day';
-    cell.style.fontSize = '18px';
-    cell.style.fontFamily = '-apple-system, BlinkMacSystemFont, sans-serif';
-    cell.style.minHeight = '38px';
-    cell.textContent = String(i);
-    if (i === now.getDate() && m === now.getMonth() && y === now.getFullYear()) {
-      cell.classList.add('home-day-today');
-      cell.style.fontSize = '20px';
-    }
-    grid.appendChild(cell);
-  }
+  var mons = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  var elM = document.getElementById('cal-month-abbr');
+  var elD = document.getElementById('cal-day-n');
+  if (elM) elM.textContent = mons[now.getMonth()];
+  if (elD) elD.textContent = String(now.getDate());
 }
 
 function applyHudDate() {
+  var el = document.getElementById('hud-date');
+  if (!el) return;
   var n = new Date();
   var wk = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-  document.getElementById('hud-date').textContent =
-    wk[n.getDay()] + ' · 今日 ' + n.getDate() + ' 日';
+  el.textContent = wk[n.getDay()] + ' · 今日 ' + n.getDate() + ' 日';
 }
 
 function initHomeScreen() {

@@ -93,6 +93,17 @@ html, body {
 .phone-bg-img.active {
   opacity: 1;
   z-index: 1;
+  animation: home-bg-kenburns 20s ease-in-out infinite alternate;
+}
+
+.phone-bg-img[data-state="1"].active { animation-delay: 0s; }
+.phone-bg-img[data-state="2"].active { animation-delay: 0s; }
+.phone-bg-img[data-state="3"].active { animation-delay: 0s; }
+.phone-bg-img[data-state="4"].active { animation-delay: 0s; }
+
+@keyframes home-bg-kenburns {
+  0%   { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
 }
 
 .phone-bg .phone-bg-img:not(.active) {
@@ -104,80 +115,94 @@ html, body {
   position: relative;
 }
 
-/* ── 顶部：日历（固定在页面最上方） ── */
-.home-cal-panel {
+/* ── 像素风翻页日历（OCT 31 效果）── 左上角，仅 HOME ── */
+.px-cal-wrap.px-cal-home-only {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 15;
-  padding: 14px 12px 16px;
-  background: rgba(12, 6, 0, 0.95);
-  border-bottom: 4px solid var(--ib);
-  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+  top: 12px;
+  left: 12px;
+  z-index: 50;
+  pointer-events: none;
+}
+.px-cal-home-only { display: none; }
+.px-cal-home-only.cal-on-home { display: block !important; }
+
+.px-cal {
+  width: 140px;
+  border: 5px solid #0a0500;
+  background: #fff;
+  overflow: hidden;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.6);
 }
 
-.home-cal-panel-top {
+.px-cal-rings {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 10px;
+  justify-content: space-around;
+  padding: 4px 6px 2px;
+  background: linear-gradient(180deg, #7b5cb0 0%, #5a3d8a 100%);
+  border-bottom: 3px solid #3a2050;
 }
 
-.home-cal-month {
-  font-size: 15px;
-  color: var(--yel);
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.85);
+.px-cal-rings span {
+  width: 16px;
+  height: 14px;
+  background: #f5c842;
+  border: 2px solid #0a0500;
+  border-radius: 50%;
+  box-shadow: 1px 1px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.4);
 }
 
-.home-cal-sub {
-  font-size: 12px;
-  color: var(--cream);
-  text-align: right;
-}
-
-.home-cal-dow {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 3px;
-  margin-bottom: 6px;
-}
-
-.home-cal-dow span {
-  font-size: 11px;
-  color: var(--creamy);
+.px-cal-head {
+  background: linear-gradient(180deg, #8a6bb8 0%, #6b4c9a 50%, #4a3070 100%);
+  padding: 6px 4px 8px;
   text-align: center;
+  border-bottom: 2px solid #0a0500;
 }
 
-.home-cal-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+.px-cal-head span {
+  font-family: var(--F);
+  font-size: 10px;
+  color: #f5c842;
+  text-shadow: 2px 2px 0 #8a5a20, 1px 1px 0 #0a0500;
+  letter-spacing: 1px;
 }
 
-.home-day {
-  min-height: 32px;
+.px-cal-body {
+  position: relative;
+  min-height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  color: var(--cream);
-  background: rgba(0, 0, 0, 0.35);
-  border: 2px solid rgba(26, 10, 0, 0.6);
+  background: #f5f0e8;
+  border: 2px solid #d0c8b8;
+  border-left-color: #e8e0d8;
+  border-top-color: #e8e0d8;
 }
 
-.home-day.home-day-empty {
-  background: transparent;
-  border-color: transparent;
+.px-cal-day {
+  font-family: var(--F);
+  font-size: 42px;
+  color: #6b4c9a;
+  text-shadow:
+    2px 2px 0 #0a0500,
+    1px 1px 0 #0a0500,
+    -1px -1px 0 #0a0500,
+    0 1px 0 #8a6bb8,
+    1px 0 0 #8a6bb8;
+  line-height: 1;
 }
 
-.home-day.home-day-today {
-  background: var(--rose);
-  color: #fff;
-  border-color: var(--ib);
-  box-shadow: 2px 2px 0 var(--is);
-  font-size: 14px;
+.px-cal-curl {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 22px 22px;
+  border-color: transparent transparent #8a8078 transparent;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,.4));
 }
 
 /* 底部 HOME1～4 四态切换 */
@@ -199,14 +224,31 @@ html, body {
 
 .home-state-btn {
   font-family: var(--F);
-  font-size: 12px;
-  padding: 14px 16px;
+  font-size: 10px;
+  padding: 10px 12px;
   color: var(--creamy);
   background: rgba(45, 30, 18, 0.95);
   border: 3px solid var(--ib);
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--is);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
+
+.home-state-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.home-icon-forest { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%231a5a1a' d='M10 2 L12 8 L10 8 L12 14 L10 14 L8 8 L6 8 Z'/%3E%3Crect x='8' y='14' width='4' height='4' fill='%235a3020'/%3E%3Crect x='4' y='16' width='3' height='2' fill='%231a5a1a'/%3E%3Crect x='13' y='16' width='3' height='2' fill='%231a5a1a'/%3E%3C/svg%3E") center/contain no-repeat; }
+.home-icon-grass { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect y='12' width='20' height='8' fill='%233a8a3a'/%3E%3Cpath fill='%2372c472' d='M2 12 L4 6 L2 12 M6 12 L8 8 L6 12 M10 12 L12 4 L10 12 M14 12 L16 8 L14 12 M18 12 L20 6 L18 12'/%3E%3C/svg%3E") center/contain no-repeat; }
+.home-icon-seaside { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect y='14' width='20' height='6' fill='%23f5d890'/%3E%3Cpath fill='%232a5aa0' d='M0 10 Q5 8 10 10 Q15 12 20 10 L20 20 L0 20 Z' opacity='.9'/%3E%3Cpath fill='%234a8ac8' d='M0 12 Q5 10 10 12 Q15 14 20 12 L20 20 L0 20 Z' opacity='.6'/%3E%3Ccircle cx='16' cy='6' r='3' fill='%23f5c842'/%3E%3C/svg%3E") center/contain no-repeat; }
+.home-icon-indoor { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23c8a87a' d='M10 2 L2 10 L4 10 L4 18 L16 18 L16 10 L18 10 Z'/%3E%3Crect x='8' y='12' width='4' height='6' fill='%235a3020'/%3E%3Crect x='2' y='10' width='2' height='8' fill='%238a704a'/%3E%3Crect x='16' y='10' width='2' height='8' fill='%238a704a'/%3E%3C/svg%3E") center/contain no-repeat; }
+
+.home-state-btn.active .home-state-icon { filter: brightness(1.2); }
 
 .home-state-btn.active {
   background: var(--yel);
@@ -607,7 +649,7 @@ html, body {
 /* ═══════════════════════════════════════
    BOTTOM NAV
 ═══════════════════════════════════════ */
-.bnav { position: absolute; bottom: 0; left: 0; right: 0; height: var(--navh); background: #0f0700; border-top: 5px solid var(--ib); display: flex; z-index: 200; }
+.bnav { position: absolute; bottom: 0; left: 0; right: 0; height: var(--navh); background: #0f0700; border-top: 5px solid var(--ib); display: flex; z-index: 200; font-family: var(--F); }
 .nbtn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: none; border: none; border-right: 3px solid var(--ib); cursor: pointer; padding: 6px 0; position: relative; transition: background .15s; }
 .nbtn:last-child { border-right: none; }
 .nbtn.active { background: rgba(232,131,74,.15); }

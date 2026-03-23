@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>仅日历</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:#111;display:flex;align-items:center;justify-content:center;font-family:sans-serif}
+h1{position:fixed;top:20px;left:50%;transform:translateX(-50%);color:#0f0;font-size:18px;z-index:10}
+.box{width:150px;border:6px solid #000;background:#fff;box-shadow:8px 8px 0 #000}
+.top{background:linear-gradient(180deg,#7b5cb0,#5a3d8a);padding:10px;display:flex;justify-content:space-around}
+.top span{width:18px;height:16px;background:#f5c842;border:2px solid #000;border-radius:50%}
+.mid{background:linear-gradient(180deg,#8a6bb8,#4a3070);padding:12px;text-align:center}
+.mid span{font-size:14px;font-weight:bold;color:#f5c842}
+.bot{min-height:110px;background:#f5f0e8;border:2px solid #d0c8b8;display:flex;align-items:center;justify-content:center;position:relative}
+.bot span{font-size:48px;font-weight:bold;color:#6b4c9a;text-shadow:2px 2px 0 #000}
+.curl{position:absolute;bottom:0;right:0;width:0;height:0;border:30px solid transparent;border-bottom-color:#8a8078;border-right-color:#8a8078}
+</style>
+</head>
+<body>
+<h1>如果你能看到这段绿字和下面的日历，说明页面正常</h1>
+<div class="box">
+  <div class="top"><span></span><span></span><span></span><span></span></div>
+  <div class="mid"><span id="m">—</span></div>
+  <div class="bot"><span id="d">—</span><div class="curl"></div></div>
+</div>
+<script>
+var M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+var n=new Date();
+document.getElementById('m').textContent=M[n.getMonth()];
+document.getElementById('d').textContent=n.getDate();
+</script>
+</body>
+</html>
