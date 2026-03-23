@@ -9,20 +9,26 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <title>US · Our Pixel World</title>
-<meta name="version" content="10">
+<meta name="version" content="11">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css" id="main-css">
+<script>
+(function(){
+  var c=document.getElementById('main-css');
+  if(c)c.href='style.css?v='+Date.now();
+})();
+</script>
 <style>
-/* 内联样式，绕过缓存：主页日历+按钮字体放大 */
-.home-cal-month { font-size: 11px !important; }
-.home-cal-sub { font-size: 8px !important; }
-.home-cal-dow span { font-size: 7px !important; }
-.home-day { font-size: 9px !important; min-height: 28px !important; }
-.home-day.home-day-today { font-size: 10px !important; }
-.home-state-btn { font-size: 9px !important; padding: 12px !important; }
-.home-tool { font-size: 8px !important; }
-.home-tool-heart { font-size: 18px !important; }
-.mtst { font-size: 10px !important; }
+/* 主页字体放大 v11 */
+.home-cal-month { font-size: 15px !important; }
+.home-cal-sub { font-size: 12px !important; }
+.home-cal-dow span { font-size: 11px !important; }
+.home-day { font-size: 13px !important; min-height: 32px !important; }
+.home-day.home-day-today { font-size: 14px !important; }
+.home-state-btn { font-size: 12px !important; padding: 14px 16px !important; }
+.home-tool { font-size: 12px !important; }
+.home-tool-heart { font-size: 24px !important; padding: 16px 20px !important; }
+.mtst { font-size: 14px !important; }
 </style>
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -275,9 +281,16 @@
 
 </div><!-- .phone -->
 
+<div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
+<script>
+(function(){
+  var b=document.getElementById('fresh-badge');
+  if(b){ b.textContent='已更新 v11'; b.style.opacity='1'; setTimeout(function(){ b.style.opacity='0'; },2500); }
+})();
+</script>
 <!-- Scripts: Leaflet → map module → app -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="map.js?v=7"></script>
-<script src="app.js?v=7"></script>
+<script src="map.js?v=11"></script>
+<script src="app.js?v=11"></script>
 </body>
 </html>

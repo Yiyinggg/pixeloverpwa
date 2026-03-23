@@ -126,13 +126,13 @@ html, body {
 }
 
 .home-cal-month {
-  font-size: 11px;
+  font-size: 15px;
   color: var(--yel);
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.85);
 }
 
 .home-cal-sub {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--cream);
   text-align: right;
 }
@@ -145,7 +145,7 @@ html, body {
 }
 
 .home-cal-dow span {
-  font-size: 7px;
+  font-size: 11px;
   color: var(--creamy);
   text-align: center;
 }
@@ -157,11 +157,11 @@ html, body {
 }
 
 .home-day {
-  min-height: 28px;
+  min-height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 13px;
   color: var(--cream);
   background: rgba(0, 0, 0, 0.35);
   border: 2px solid rgba(26, 10, 0, 0.6);
@@ -177,7 +177,7 @@ html, body {
   color: #fff;
   border-color: var(--ib);
   box-shadow: 2px 2px 0 var(--is);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 /* 底部 HOME1～4 四态切换 */
@@ -199,8 +199,8 @@ html, body {
 
 .home-state-btn {
   font-family: var(--F);
-  font-size: 9px;
-  padding: 12px 12px;
+  font-size: 12px;
+  padding: 14px 16px;
   color: var(--creamy);
   background: rgba(45, 30, 18, 0.95);
   border: 3px solid var(--ib);
@@ -233,8 +233,8 @@ html, body {
 
 .home-tool {
   font-family: var(--F);
-  font-size: 8px;
-  padding: 12px 14px;
+  font-size: 12px;
+  padding: 14px 16px;
   color: var(--yel);
   background: rgba(10, 5, 0, 0.85);
   border: 3px solid var(--ib);
@@ -243,8 +243,8 @@ html, body {
 }
 
 .home-tool-heart {
-  font-size: 18px;
-  padding: 14px 16px;
+  font-size: 24px;
+  padding: 16px 20px;
   color: #fff;
   background: rgba(200, 60, 90, 0.9);
   animation: hPulse 2s ease-in-out infinite;
@@ -425,7 +425,7 @@ html, body {
 .hud-c { font-size: 5px; color: var(--rose); margin-top: 2px; text-align: right; }
 
 /* miss toast：在日历面板下方 */
-.mtst { position: absolute; top: 220px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #f5f0d0; border: 4px solid var(--ib); box-shadow: 4px 4px 0 var(--is); padding: 10px 16px; font-size: 10px; color: var(--bdk); white-space: nowrap; z-index: 100; pointer-events: none; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+.mtst { position: absolute; top: 240px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #f5f0d0; border: 4px solid var(--ib); box-shadow: 4px 4px 0 var(--is); padding: 12px 18px; font-size: 14px; color: var(--bdk); white-space: nowrap; z-index: 100; pointer-events: none; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
 .mtst.show { transform: translateX(-50%) translateY(0); }
 
 /* particles */
