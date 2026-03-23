@@ -95,14 +95,18 @@ function renderHomeCalendar() {
   for (i = 0; i < startPad; i++) {
     var empty = document.createElement('div');
     empty.className = 'home-day home-day-empty';
+    empty.style.minHeight = '34px';
     grid.appendChild(empty);
   }
   for (i = 1; i <= dim; i++) {
     var cell = document.createElement('div');
     cell.className = 'home-day';
+    cell.style.fontSize = '15px';
+    cell.style.minHeight = '34px';
     cell.textContent = String(i);
     if (i === now.getDate() && m === now.getMonth() && y === now.getFullYear()) {
       cell.classList.add('home-day-today');
+      cell.style.fontSize = '16px';
     }
     grid.appendChild(cell);
   }

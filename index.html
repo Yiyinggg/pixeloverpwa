@@ -9,7 +9,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <title>US · Our Pixel World</title>
-<meta name="version" content="11">
+<meta name="version" content="13">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css" id="main-css">
 <script>
@@ -48,28 +48,28 @@
 
   <header class="home-cal-panel">
     <div class="home-cal-panel-top">
-      <span class="home-cal-month" id="cal-month-label">—</span>
-      <span class="home-cal-sub" id="hud-date">—</span>
+      <span class="home-cal-month" id="cal-month-label" style="font-size:18px">—</span>
+      <span class="home-cal-sub" id="hud-date" style="font-size:14px">—</span>
     </div>
-    <div class="home-cal-dow">
+    <div class="home-cal-dow" style="font-size:12px">
       <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
     </div>
     <div class="home-cal-days" id="cal-grid"></div>
   </header>
 
-  <div class="mtst" id="mtst">💌 SENDING MISS YOU…</div>
+  <div class="mtst" id="mtst" style="font-size:16px">💌 SENDING MISS YOU…</div>
 
   <div class="home-toolbar">
-    <button type="button" class="home-tool" onclick="switchTo('s-map')" title="地图">MAP</button>
-    <button type="button" class="home-tool" onclick="switchTo('s-bottle')" title="漂流瓶">BTL</button>
-    <button type="button" class="home-tool home-tool-heart" id="hbtn" onclick="sendMiss()" title="想念">♥</button>
+    <button type="button" class="home-tool" onclick="switchTo('s-map')" title="地图" style="font-size:14px">MAP</button>
+    <button type="button" class="home-tool" onclick="switchTo('s-bottle')" title="漂流瓶" style="font-size:14px">BTL</button>
+    <button type="button" class="home-tool home-tool-heart" id="hbtn" onclick="sendMiss()" title="想念" style="font-size:28px">♥</button>
   </div>
 
   <nav class="home-state-nav" aria-label="主页背景">
-    <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)">HOME 1</button>
-    <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)">HOME 2</button>
-    <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)">HOME 3</button>
-    <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)">HOME 4</button>
+    <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)" style="font-size:14px">HOME 1</button>
+    <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)" style="font-size:14px">HOME 2</button>
+    <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)" style="font-size:14px">HOME 3</button>
+    <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)" style="font-size:14px">HOME 4</button>
   </nav>
 
 </div><!-- /s-home -->
@@ -285,7 +285,7 @@
 <script>
 (function(){
   var b=document.getElementById('fresh-badge');
-  if(b){ b.textContent='已更新 v11'; b.style.opacity='1'; setTimeout(function(){ b.style.opacity='0'; },2500); }
+  if(b){ b.textContent='已更新 v13 字体已放大'; b.style.opacity='1'; setTimeout(function(){ b.style.opacity='0'; },2500); }
 })();
 </script>
 <!-- Scripts: Leaflet → map module → app -->
