@@ -161,11 +161,11 @@ function initHomeScreen() {
   renderHomeCalendar();
   renderDailyPoem();
   homeDayKey = dayKey(new Date());
-  var saved = 1;
+  var saved = 10; // default: ADVENTURE
   try {
-    saved = parseInt(localStorage.getItem('pixelHomeScene'), 10) || 1;
+    saved = parseInt(localStorage.getItem('pixelHomeScene'), 10) || 10;
   } catch (e) {}
-  if (saved < 1 || saved > 10) saved = 1;
+  if (saved < 1 || saved > 10) saved = 10;
   setHomeState(saved);
 }
 

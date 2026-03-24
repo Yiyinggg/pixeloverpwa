@@ -48,7 +48,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   border-top: 1px solid rgba(255,255,255,0.12) !important;
   border-radius: 0 !important;
   box-shadow: 0 -3px 12px rgba(0,0,0,0.45) !important;
-  padding: 0 6px !important; gap: 0 !important;
+  padding: 0 12px !important; gap: 0 !important;
   align-items: stretch !important;
   max-height: none !important;
   scrollbar-width: none !important;
@@ -83,6 +83,29 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 .home-icon-movie { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='6' width='18' height='12' fill='%23222'/%3E%3Crect x='1' y='4' width='18' height='4' fill='%23eeeeee'/%3E%3Crect x='2' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='7' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='12' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='4' y='10' width='5' height='6' fill='%230a0a40'/%3E%3Crect x='11' y='10' width='5' height='6' fill='%230a0a40'/%3E%3Crect x='6' y='11' width='1' height='4' fill='%23f5c842'/%3E%3Crect x='13' y='11' width='1' height='4' fill='%23f5c842'/%3E%3C/svg%3E") !important; }
 .home-icon-adventure { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' fill='%23204860'/%3E%3Crect x='8' y='2' width='2' height='2' fill='%23ffffff'/%3E%3Crect x='6' y='4' width='6' height='2' fill='%23d0e8f8'/%3E%3Crect x='4' y='6' width='8' height='2' fill='%23888888'/%3E%3Crect x='3' y='8' width='10' height='2' fill='%23666666'/%3E%3Crect x='2' y='10' width='12' height='2' fill='%23446644'/%3E%3Crect x='0' y='12' width='20' height='6' fill='%23335533'/%3E%3Crect x='13' y='8' width='5' height='8' fill='%23446644'/%3E%3C/svg%3E") !important; }
 
+/* ── BG SHIMMER: light sweep + brightness/saturation pulse ── */
+.phone-bg-img.active {
+  animation: home-bg-kenburns 20s ease-in-out infinite alternate, bgPulse 5s ease-in-out infinite !important;
+}
+@keyframes bgPulse {
+  0%, 100% { filter: brightness(1)    saturate(1); }
+  50%       { filter: brightness(1.09) saturate(1.15); }
+}
+#phone-home-bg::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important; left: 0 !important;
+  width: 45% !important; height: 100% !important;
+  z-index: 4 !important; pointer-events: none !important;
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.09) 50%, transparent 80%) !important;
+  animation: bgSweep 11s ease-in-out infinite !important;
+}
+@keyframes bgSweep {
+  0%, 100% { transform: translateX(-130%) skewX(-12deg); opacity: 0; }
+  4%        { opacity: 1; }
+  28%       { transform: translateX(320%) skewX(-12deg); opacity: 1; }
+  33%       { opacity: 0; transform: translateX(370%) skewX(-12deg); }
+}
 
 /* ── DAILY POEM: sticky note aligned with calendar top ── */
 #home-poem {
@@ -257,7 +280,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
   <!-- 背景层：与屏幕同级，在 .phone 下铺满内容区 -->
   <div class="phone-bg" id="phone-home-bg" aria-hidden="true">
-    <img class="phone-bg-img active" src="images/carcamping.png"  alt="" data-state="1">
+    <img class="phone-bg-img"        src="images/carcamping.png"  alt="" data-state="1">
     <img class="phone-bg-img"        src="images/beachparty.png"  alt="" data-state="2">
     <img class="phone-bg-img"        src="images/citywalk.png"    alt="" data-state="3">
     <img class="phone-bg-img"        src="images/diving.png"      alt="" data-state="4">
@@ -266,7 +289,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
     <img class="phone-bg-img"        src="images/working.png"     alt="" data-state="7">
     <img class="phone-bg-img"        src="images/sleep.png"       alt="" data-state="8">
     <img class="phone-bg-img"        src="images/movie.png"       alt="" data-state="9">
-    <img class="phone-bg-img"        src="images/adventure.png"   alt="" data-state="10">
+    <img class="phone-bg-img active" src="images/adventure.png"   alt="" data-state="10">
   </div>
 
   <!-- 日历：作为 .phone 直接子元素，仅 HOME 时显示 -->
@@ -513,7 +536,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
 <!-- 状态切换按钮：.phone 直接子元素，避免被 #s-home overflow:hidden 裁剪 -->
 <nav id="home-state-nav" class="home-state-nav" aria-label="home scene" style="display:flex;">
-  <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)">
+  <button type="button" class="home-state-btn" data-state="1" onclick="setHomeState(1)">
     <span class="home-state-icon home-icon-forest"></span>
     <span class="home-state-label">FOREST</span>
   </button>
@@ -549,7 +572,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
     <span class="home-state-icon home-icon-movie"></span>
     <span class="home-state-label">MOVIE</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="10" onclick="setHomeState(10)">
+  <button type="button" class="home-state-btn active" data-state="10" onclick="setHomeState(10)">
     <span class="home-state-icon home-icon-adventure"></span>
     <span class="home-state-label">ADVENTURE</span>
   </button>
@@ -557,7 +580,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v33</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v34</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
