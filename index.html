@@ -94,25 +94,6 @@
     <button type="button" class="home-tool home-tool-heart" id="hbtn" onclick="sendMiss()" title="想念">♥</button>
   </div>
 
-  <nav class="home-state-nav" aria-label="主页背景">
-    <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)" title="森林">
-      <span class="home-state-icon home-icon-forest"></span>
-      <span class="home-state-label">森林</span>
-    </button>
-    <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)" title="草地">
-      <span class="home-state-icon home-icon-grass"></span>
-      <span class="home-state-label">草地</span>
-    </button>
-    <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)" title="海边">
-      <span class="home-state-icon home-icon-seaside"></span>
-      <span class="home-state-label">海边</span>
-    </button>
-    <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)" title="室内">
-      <span class="home-state-icon home-icon-indoor"></span>
-      <span class="home-state-label">室内</span>
-    </button>
-  </nav>
-
 </div><!-- /s-home -->
 
 
@@ -320,9 +301,29 @@
 
 <div id="gtst">MSG</div>
 
+<!-- 状态切换按钮：.phone 直接子元素，避免被 #s-home overflow:hidden 裁剪 -->
+<nav id="home-state-nav" class="home-state-nav" aria-label="主页背景" style="position:absolute;bottom:78px;left:8px;right:8px;z-index:25;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px 8px;background:rgba(6,2,0,0.85);border:3px solid #1a0a00;box-shadow:4px 4px 0 #0a0500;">
+  <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)" title="森林">
+    <span class="home-state-icon home-icon-forest"></span>
+    <span class="home-state-label">森林</span>
+  </button>
+  <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)" title="草地">
+    <span class="home-state-icon home-icon-grass"></span>
+    <span class="home-state-label">草地</span>
+  </button>
+  <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)" title="海边">
+    <span class="home-state-icon home-icon-seaside"></span>
+    <span class="home-state-label">海边</span>
+  </button>
+  <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)" title="室内">
+    <span class="home-state-icon home-icon-indoor"></span>
+    <span class="home-state-label">室内</span>
+  </button>
+</nav>
+
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v22</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v23</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){

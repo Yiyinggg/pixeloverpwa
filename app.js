@@ -59,7 +59,7 @@ function homeBgUrl(n) {
 }
 
 function applyHomeLabels() {
-  var btns = document.querySelectorAll('#s-home .home-state-btn .home-state-label');
+  var btns = document.querySelectorAll('.home-state-btn .home-state-label');
   for (var i = 0; i < btns.length; i++) {
     if (HOME_LABELS[i]) btns[i].textContent = HOME_LABELS[i];
   }
@@ -74,7 +74,7 @@ window.setHomeState = function(n) {
   document.querySelectorAll('#phone-home-bg .phone-bg-img').forEach(function(img) {
     img.classList.toggle('active', parseInt(img.getAttribute('data-state'), 10) === n);
   });
-  document.querySelectorAll('#s-home .home-state-btn').forEach(function(b) {
+  document.querySelectorAll('.home-state-btn').forEach(function(b) {
     b.classList.toggle('active', parseInt(b.getAttribute('data-state'), 10) === n);
   });
   try {
