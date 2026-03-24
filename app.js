@@ -188,6 +188,74 @@ function refreshHomeScreenIfNewDay() {
   if (home) home.appendChild(v);
 })();
 
+/* ── Tap interaction: hearts + speech bubble + bounce ── */
+var TAP_BUBBLE_MSGS = ['hihi !', '\u2665  \u2665', '*blush*', 'yay ~!', '\u2661  !!', 'hehe~', '\u2665\u2665\u2665'];
+
+window.spawnTapEffect = function(x, y) {
+  var phone = document.querySelector('.phone');
+  if (!phone) return;
+
+  /* hearts */
+  var chars = ['\u2665', '\u2764', '\u2661'];
+  var colors = ['#ff6b8a', '#ff9eb5', '#f5c842', '#ff4d6d', '#e87898', '#c880c8'];
+  for (var i = 0; i < 8; i++) {
+    (function(i) {
+      var h = document.createElement('div');
+      h.className = 'tap-heart';
+      h.textContent = chars[i % chars.length];
+      h.style.left = (x + (Math.random() - 0.5) * 44) + 'px';
+      h.style.top  = y + 'px';
+      h.style.color = colors[Math.floor(Math.random() * colors.length)];
+      h.style.fontSize = (10 + Math.floor(Math.random() * 14)) + 'px';
+      h.style.setProperty('--hx', ((Math.random() - 0.5) * 72) + 'px');
+      h.style.setProperty('--hy', -(55 + Math.random() * 75) + 'px');
+      h.style.setProperty('--rot',  ((Math.random() - 0.5) * 24) + 'deg');
+      h.style.setProperty('--rot2', ((Math.random() - 0.5) * 40) + 'deg');
+      h.style.setProperty('--dur',  (0.75 + Math.random() * 0.65) + 's');
+      h.style.animationDelay = (i * 0.06) + 's';
+      phone.appendChild(h);
+      h.addEventListener('animationend', function() { h.remove(); });
+    })(i);
+  }
+
+  /* speech bubble */
+  var bub = document.createElement('div');
+  bub.className = 'tap-bubble';
+  bub.textContent = TAP_BUBBLE_MSGS[Math.floor(Math.random() * TAP_BUBBLE_MSGS.length)];
+  var bx = Math.max(8, Math.min(x - 34, (phone.clientWidth || 320) - 110));
+  var by = Math.max(8, y - 62);
+  bub.style.left = bx + 'px';
+  bub.style.top  = by + 'px';
+  phone.appendChild(bub);
+  bub.addEventListener('animationend', function() { bub.remove(); });
+
+  /* background bounce */
+  var activeBg = document.querySelector('#phone-home-bg .phone-bg-img.active');
+  if (activeBg) {
+    activeBg.classList.remove('tap-bounce');
+    void activeBg.offsetWidth;
+    activeBg.classList.add('tap-bounce');
+    setTimeout(function() { activeBg.classList.remove('tap-bounce'); }, 460);
+  }
+};
+
+/* attach tap handler once DOM is ready */
+(function attachTapHandler() {
+  var home = document.getElementById('s-home');
+  if (!home) return;
+  home.addEventListener('click', function(e) {
+    if (e.target.closest('button, .home-toolbar, .bnav, #home-state-nav')) return;
+    var pr = document.querySelector('.phone').getBoundingClientRect();
+    window.spawnTapEffect(e.clientX - pr.left, e.clientY - pr.top);
+  });
+  home.addEventListener('touchstart', function(e) {
+    if (e.target.closest('button, .home-toolbar, .bnav, #home-state-nav')) return;
+    var t = e.touches[0];
+    var pr = document.querySelector('.phone').getBoundingClientRect();
+    window.spawnTapEffect(t.clientX - pr.left, t.clientY - pr.top);
+  }, { passive: true });
+})();
+
 /* ── Miss You ── */
 window.sendMiss = function() {
   var t = document.getElementById('mtst');
