@@ -18,6 +18,8 @@ window.switchTo = function(id) {
   });
   var cal = document.getElementById('home-px-cal');
   if (cal) cal.classList.toggle('cal-on-home', id === 's-home');
+  var nav = document.getElementById('home-state-nav');
+  if (nav) nav.style.display = (id === 's-home') ? 'flex' : 'none';
   if (id === 's-map') {
     if (!mapReady) { mapReady = true; }
     initLeaflet();
@@ -41,7 +43,7 @@ var HOME_BG_FILES = [
   'images/home4-indoor-placeholder.svg'
 ];
 
-var HOME_LABELS = ['森林', '草地', '海边', '室内'];
+var HOME_LABELS = ['FOREST', 'MEADOW', 'SEASIDE', 'INDOOR'];
 
 /** 换素材后改成 2、3… 即可让浏览器重新拉图片 */
 var HOME_ASSET_V = '2';

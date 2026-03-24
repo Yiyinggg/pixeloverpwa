@@ -19,40 +19,46 @@
 })();
 </script>
 <style>
-/* 字体放大 v2 */
-.home-state-btn { font-size: 10px !important; padding: 10px 12px !important; }
-.home-tool { font-size: 16px !important; }
-.home-tool-heart { font-size: 32px !important; padding: 18px 24px !important; }
-.mtst { font-size: 20px !important; }
-.px-cal-head span { font-size: 12px !important; }
-.px-cal-day { font-size: 42px !important; }
-.mhud-t { font-size: 11px !important; }
-.mhud-m { font-size: 8px !important; }
-.msrch input { font-size: 10px !important; padding: 10px 12px !important; }
-.msrch button { font-size: 10px !important; padding: 10px 12px !important; }
-.mstats .msr, .mleg .mlr { font-size: 8px !important; }
-.addbtn { font-size: 26px !important; }
-.amp-ttl { font-size: 11px !important; }
-.amp-loc, .amp-lbl, .amp-sel, .amp-inp { font-size: 9px !important; }
-.amp-save, .amp-cancel { font-size: 10px !important; }
-.bhud-t { font-size: 11px !important; }
-.bhud-s { font-size: 9px !important; }
-.dind { font-size: 9px !important; padding: 10px 16px !important; }
-.thint { font-size: 10px !important; }
-.btab { font-size: 9px !important; padding: 14px 6px !important; }
-.wphd-t { font-size: 10px !important; }
-.parch textarea { font-size: 10px !important; line-height: 1.8 !important; }
-.mbtn, .sbtn { font-size: 9px !important; padding: 8px 12px !important; }
-.l-hd { font-size: 10px !important; }
-.l-bd { font-size: 10px !important; line-height: 2.2 !important; }
-.l-mu-t { font-size: 8px !important; }
-.l-mu-p, .rcls { font-size: 10px !important; }
-.nlbl { font-size: 8px !important; }
-.nbadge { font-size: 7px !important; }
-#mtoast, #gtst { font-size: 10px !important; padding: 10px 16px !important; }
-/* 状态按钮图标与文字（内联防缓存） */
-.home-state-btn { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 4px !important; }
-.home-state-icon { width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important; background-size: contain !important; background-position: center !important; background-repeat: no-repeat !important; }
+/* ── RESPONSIVE PHONE: fill the screen on any device ── */
+html, body { height: 100dvh !important; overflow: hidden !important; }
+.phone { width: 100vw !important; height: 100dvh !important; max-width: 390px !important; max-height: 844px !important; }
+
+/* ── GLOBAL FONT: 12px Press Start 2P ── */
+* { font-family: 'Press Start 2P', monospace !important; }
+.home-tool, .home-tool-heart, .mtst, .bnav *, .nlbl, .nbadge,
+.mhud-t, .mhud-m, .msrch *, .mstats *, .amp-ttl, .amp-loc,
+.amp-lbl, .amp-sel, .amp-inp, .amp-save, .amp-cancel, .btab,
+.bhud-t, .bhud-s, .dind, .thint, .parch textarea, .mbtn, .sbtn,
+.l-hd, .l-bd, .l-mu-t, .l-mu-p, .rcls, #mtoast, #gtst,
+.px-cal-head span, .wphd-t, .addbtn { font-size: 12px !important; }
+.px-cal-day { font-size: 40px !important; }
+.home-tool-heart { font-size: 28px !important; }
+.addbtn { font-size: 24px !important; }
+.nbadge { font-size: 8px !important; }
+
+/* ── STATE NAV: no individual button boxes ── */
+#home-state-nav {
+  background: rgba(0,0,0,0.55) !important;
+  border: none !important; border-top: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: none !important;
+  left: 0 !important; right: 0 !important;
+  gap: 0 !important; justify-content: space-around !important;
+  padding: 8px 4px !important;
+}
+#home-state-nav .home-state-btn {
+  background: transparent !important;
+  border: none !important; box-shadow: none !important;
+  color: rgba(200,168,122,0.55) !important;
+  font-size: 8px !important;
+  padding: 6px 8px !important;
+  flex-direction: column !important; display: flex !important;
+  align-items: center !important; gap: 4px !important;
+}
+#home-state-nav .home-state-btn.active {
+  color: #f5c842 !important;
+  background: transparent !important;
+}
+.home-state-icon { width: 20px !important; height: 20px !important; min-width: 20px !important; min-height: 20px !important; background-size: contain !important; background-position: center !important; background-repeat: no-repeat !important; }
 .home-icon-forest { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%231a5a1a' d='M10 2 L12 8 L10 8 L12 14 L10 14 L8 8 L6 8 Z'/%3E%3Crect x='8' y='14' width='4' height='4' fill='%235a3020'/%3E%3Crect x='4' y='16' width='3' height='2' fill='%231a5a1a'/%3E%3Crect x='13' y='16' width='3' height='2' fill='%231a5a1a'/%3E%3C/svg%3E") !important; }
 .home-icon-grass { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect y='12' width='20' height='8' fill='%233a8a3a'/%3E%3Cpath fill='%2372c472' d='M2 12 L4 6 L2 12 M6 12 L8 8 L6 12 M10 12 L12 4 L10 12 M14 12 L16 8 L14 12 M18 12 L20 6 L18 12'/%3E%3C/svg%3E") !important; }
 .home-icon-seaside { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect y='14' width='20' height='6' fill='%23f5d890'/%3E%3Cpath fill='%232a5aa0' d='M0 10 Q5 8 10 10 Q15 12 20 10 L20 20 L0 20 Z' opacity='.9'/%3E%3Cpath fill='%234a8ac8' d='M0 12 Q5 10 10 12 Q15 14 20 12 L20 20 L0 20 Z' opacity='.6'/%3E%3Ccircle cx='16' cy='6' r='3' fill='%23f5c842'/%3E%3C/svg%3E") !important; }
@@ -302,28 +308,28 @@
 <div id="gtst">MSG</div>
 
 <!-- 状态切换按钮：.phone 直接子元素，避免被 #s-home overflow:hidden 裁剪 -->
-<nav id="home-state-nav" class="home-state-nav" aria-label="主页背景" style="position:absolute;bottom:78px;left:8px;right:8px;z-index:25;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px 8px;background:rgba(6,2,0,0.85);border:3px solid #1a0a00;box-shadow:4px 4px 0 #0a0500;">
-  <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)" title="森林">
+<nav id="home-state-nav" class="home-state-nav" aria-label="home scene" style="position:absolute;bottom:72px;left:0;right:0;z-index:25;display:flex;">
+  <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)" title="FOREST">
     <span class="home-state-icon home-icon-forest"></span>
-    <span class="home-state-label">森林</span>
+    <span class="home-state-label">FOREST</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)" title="草地">
+  <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)" title="MEADOW">
     <span class="home-state-icon home-icon-grass"></span>
-    <span class="home-state-label">草地</span>
+    <span class="home-state-label">MEADOW</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)" title="海边">
+  <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)" title="SEASIDE">
     <span class="home-state-icon home-icon-seaside"></span>
-    <span class="home-state-label">海边</span>
+    <span class="home-state-label">SEASIDE</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)" title="室内">
+  <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)" title="INDOOR">
     <span class="home-state-icon home-icon-indoor"></span>
-    <span class="home-state-label">室内</span>
+    <span class="home-state-label">INDOOR</span>
   </button>
 </nav>
 
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v23</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v24</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
