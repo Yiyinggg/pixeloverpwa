@@ -20,6 +20,8 @@ window.switchTo = function(id) {
   if (cal) cal.classList.toggle('cal-on-home', id === 's-home');
   var nav = document.getElementById('home-state-nav');
   if (nav) nav.style.display = (id === 's-home') ? 'flex' : 'none';
+  var poem = document.getElementById('home-poem');
+  if (poem) poem.style.display = (id === 's-home') ? 'block' : 'none';
   if (id === 's-map') {
     if (!mapReady) { mapReady = true; }
     initLeaflet();
@@ -43,10 +45,48 @@ var HOME_BG_FILES = [
   'images/home4.png',
   'images/home5.png',
   'images/home6.png',
-  'images/home7.png'
+  'images/home7.png',
+  'images/home8.png',
+  'images/home9.png',
+  'images/home10.png',
+  'images/home11.png'
 ];
 
-var HOME_LABELS = ['FOREST', 'SEASIDE', 'INDOOR', 'CITY', 'SNOW', 'DIVING', 'MOTO'];
+var HOME_LABELS = ['FOREST', 'SEASIDE', 'INDOOR', 'CITY', 'SNOW', 'DIVING', 'MOTO', 'DRIVE', 'WORK', 'SLEEP', 'MOVIE'];
+
+var DAILY_POEMS = [
+  'I carry your heart with me.',
+  'You are my sun in winter.',
+  'Love is the only gold.',
+  'You and me. Always.',
+  'Together is beautiful.',
+  'You make me whole.',
+  'My heart is yours.',
+  'Every day I think of you.',
+  'Still I love you.',
+  'You are my peace.',
+  'Near or far, we are ours.',
+  'Two hearts, one path.',
+  'Thank you. For all of it.',
+  'You complete me.',
+  'I love you more today.',
+  'Missing you always.',
+  'Home is where you are.',
+  'You are my light.',
+  'Always and forever, yours.',
+  'Love never ends.',
+  'You are enough.',
+  'My favorite person.',
+  'Stay with me. Please.',
+  'Our story is my favorite.',
+  'I found you. Lucky me.',
+  'You are the poem.',
+  'Forever is not long enough.',
+  'Counting days. Not long now.',
+  'I think of you. Always.',
+  'Soon. Very soon. Promise.',
+  'You are worth every mile.'
+];
 
 /** 换素材后改成 2、3… 即可让浏览器重新拉图片 */
 var HOME_ASSET_V = '2';
@@ -72,7 +112,7 @@ function applyHomeLabels() {
 
 window.setHomeState = function(n) {
   n = parseInt(n, 10);
-  if (n < 1 || n > 7) return;
+  if (n < 1 || n > 11) return;
   var root = document.getElementById('s-home');
   if (!root) return;
   root.setAttribute('data-home-state', String(n));
@@ -86,6 +126,16 @@ window.setHomeState = function(n) {
     localStorage.setItem('pixelHomeScene', String(n));
   } catch (e) {}
 };
+
+function renderDailyPoem() {
+  var el = document.getElementById('poem-text');
+  if (!el) return;
+  var d = new Date();
+  var start = new Date(d.getFullYear(), 0, 0);
+  var dayOfYear = Math.floor((d - start) / 86400000);
+  var idx = dayOfYear % DAILY_POEMS.length;
+  el.textContent = '\u201c' + DAILY_POEMS[idx] + '\u201d';
+}
 
 function renderHomeCalendar() {
   var now = new Date();
@@ -108,12 +158,13 @@ function initHomeScreen() {
   applyHomeLabels();
   applyHudDate();
   renderHomeCalendar();
+  renderDailyPoem();
   homeDayKey = dayKey(new Date());
   var saved = 1;
   try {
     saved = parseInt(localStorage.getItem('pixelHomeScene'), 10) || 1;
   } catch (e) {}
-  if (saved < 1 || saved > 4) saved = 1;
+  if (saved < 1 || saved > 11) saved = 1;
   setHomeState(saved);
 }
 
@@ -123,6 +174,7 @@ function refreshHomeScreenIfNewDay() {
     homeDayKey = k;
     applyHudDate();
     renderHomeCalendar();
+    renderDailyPoem();
   }
 }
 
