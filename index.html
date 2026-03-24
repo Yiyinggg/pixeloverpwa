@@ -288,41 +288,46 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 /* ── MOVIE SCENE TV ICON ── */
 #home-tv-btn {
   position: absolute !important;
-  left: 50% !important; top: 44% !important;
-  transform: translate(-50%, -50%) !important;
+  right: 14px !important; bottom: 130px !important;
+  left: auto !important; top: auto !important;
+  transform: none !important;
   z-index: 15 !important;
   cursor: pointer !important;
   display: flex !important;
-  flex-direction: column !important;
+  flex-direction: row !important;
   align-items: center !important;
-  gap: 8px !important;
+  gap: 6px !important;
   -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
   touch-action: manipulation !important;
+  background: rgba(0,0,0,0.38) !important;
+  border-radius: 6px !important;
+  padding: 5px 8px 5px 5px !important;
 }
 .tv-svg {
-  width: 88px !important; height: 88px !important;
+  width: 44px !important; height: 44px !important;
   animation: tvGlow 2.8s ease-in-out infinite !important;
+  flex-shrink: 0 !important;
 }
 @keyframes tvGlow {
-  0%, 100% { filter: drop-shadow(0 0 3px rgba(50,120,255,0.35)); }
-  50%       { filter: drop-shadow(0 0 18px rgba(50,140,255,1)) drop-shadow(0 0 6px rgba(120,190,255,0.8)); }
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(50,120,255,0.4)); }
+  50%       { filter: drop-shadow(0 0 10px rgba(50,140,255,0.95)) drop-shadow(0 0 4px rgba(120,190,255,0.7)); }
 }
 .tv-screen {
   animation: tvScreenFlicker 2.8s ease-in-out infinite !important;
 }
 @keyframes tvScreenFlicker {
   0%, 100% { opacity: 0.12; }
-  45%       { opacity: 0.32; }
+  45%       { opacity: 0.35; }
   55%       { opacity: 0.28; }
 }
-#home-tv-btn:active .tv-svg {
-  transform: scale(0.9) !important;
-}
+#home-tv-btn:active { opacity: 0.75 !important; }
 .tv-label {
-  font-size: 7px !important;
-  color: rgba(130,185,255,0.82) !important;
-  letter-spacing: 2px !important;
-  text-shadow: 0 0 10px rgba(50,120,255,0.7) !important;
+  font-size: 6px !important;
+  color: rgba(130,185,255,0.85) !important;
+  letter-spacing: 1px !important;
+  text-shadow: 0 0 8px rgba(50,120,255,0.65) !important;
+  line-height: 1.5 !important;
+  white-space: nowrap !important;
 }
 
 /* ── MAP COUNTDOWN ── */
@@ -886,7 +891,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v37</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v38</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
