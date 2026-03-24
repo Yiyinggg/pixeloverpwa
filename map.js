@@ -66,8 +66,8 @@ window.mapDelPin = function(btn) {
 function updateMapStats() {
   var c = { purple: 0, blue: 0, green: 0, pink: 0 };
   leafMarkers.forEach(function(m) { c[m._ptype]++; });
-  document.getElementById('c-pp').textContent = 'MY: '   + c.purple;
-  document.getElementById('c-bp').textContent = 'HIS: '  + c.blue;
+  document.getElementById('c-pp').textContent = 'YIYING: '  + c.purple;
+  document.getElementById('c-bp').textContent = 'VITALIK: ' + c.blue;
   document.getElementById('c-gp').textContent = 'PLAN: ' + c.green;
   document.getElementById('c-pk').textContent = 'DONE: ' + c.pink;
 }

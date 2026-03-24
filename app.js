@@ -558,12 +558,11 @@ window.addMovie = function() {
 
 /* ══ MAP COUNTDOWN ══ */
 window.toggleMapCountdown = function() {
-  var body = document.getElementById('mcd-body');
-  var caret = document.getElementById('mcd-caret');
-  if (!body) return;
-  var open = body.style.display !== 'none';
-  body.style.display = open ? 'none' : 'block';
-  if (caret) caret.classList.toggle('closed', open);
+  var popup = document.getElementById('map-countdown');
+  if (!popup) return;
+  var showing = popup.style.display !== 'none';
+  popup.style.display = showing ? 'none' : 'block';
+  if (!showing) updateMeetCountdown();
 };
 
 window.editMeetDate = function() {
