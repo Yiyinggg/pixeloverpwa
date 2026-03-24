@@ -22,6 +22,8 @@ window.switchTo = function(id) {
   if (nav) nav.style.display = (id === 's-home') ? 'flex' : 'none';
   var poem = document.getElementById('home-poem');
   if (poem) poem.style.display = (id === 's-home') ? 'block' : 'none';
+  var tz = document.getElementById('home-tap-zone');
+  if (tz) tz.style.display = (id === 's-home') ? 'block' : 'none';
   if (id === 's-map') {
     if (!mapReady) { mapReady = true; }
     initLeaflet();
@@ -310,22 +312,11 @@ window.spawnTapEffect = function(x, y) {
   _tapTimer = setTimeout(function() { _tapCount = 0; }, 1100);
 };
 
-/* — attach tap handler — */
-(function attachTapHandler() {
-  var home = document.getElementById('s-home');
-  if (!home) return;
-  var ignore = 'button, .home-toolbar, .bnav, #home-state-nav';
-  home.addEventListener('click', function(e) {
-    if (e.target.closest(ignore)) return;
-    var pr = document.querySelector('.phone').getBoundingClientRect();
-    window.spawnTapEffect(e.clientX - pr.left, e.clientY - pr.top);
-  });
-  home.addEventListener('touchstart', function(e) {
-    if (e.target.closest(ignore)) return;
-    var t = e.touches[0], pr = document.querySelector('.phone').getBoundingClientRect();
-    window.spawnTapEffect(t.clientX - pr.left, t.clientY - pr.top);
-  }, { passive: true });
-})();
+/* — tap handler called by #home-tap-zone onclick — */
+window._htap = function(e) {
+  var pr = document.querySelector('.phone').getBoundingClientRect();
+  window.spawnTapEffect(e.clientX - pr.left, e.clientY - pr.top);
+};
 
 /* ── Miss You ── */
 window.sendMiss = function() {

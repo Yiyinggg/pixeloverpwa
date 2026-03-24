@@ -281,6 +281,11 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
     </div>
   </div>
 
+  <!-- 透明点击层：主屏专用，在背景之上、按钮之下，确保 iOS Safari 能收到点击 -->
+  <div id="home-tap-zone"
+    style="position:absolute;left:0;right:0;top:0;bottom:72px;z-index:6;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,0);background:rgba(0,0,0,0.001);"
+    onclick="if(window._htap)window._htap(event)"></div>
+
   <!-- 每日诗句：HOME 时显示，右侧顶部 -->
   <div id="home-poem">
     <div class="poem-card">
@@ -556,7 +561,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v31</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v32</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
