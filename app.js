@@ -27,6 +27,12 @@ window.switchTo = function(id) {
   if (poem) poem.style.display = (id === 's-home') ? 'block' : 'none';
   var tz = document.getElementById('home-tap-zone');
   if (tz) tz.style.display = (id === 's-home') ? 'block' : 'none';
+  /* TV icon: show only on home + movie scene */
+  var tvBtn = document.getElementById('home-tv-btn');
+  if (tvBtn) {
+    var curState = parseInt((document.getElementById('s-home') || {}).getAttribute('data-home-state'), 10);
+    tvBtn.style.display = (id === 's-home' && curState === 9) ? 'flex' : 'none';
+  }
   if (id === 's-map') {
     if (!mapReady) { mapReady = true; }
     initLeaflet();
@@ -127,6 +133,12 @@ window.setHomeState = function(n) {
   document.querySelectorAll('.home-state-btn').forEach(function(b) {
     b.classList.toggle('active', parseInt(b.getAttribute('data-state'), 10) === n);
   });
+  /* show TV icon only on MOVIE scene (state 9) and only when on home screen */
+  var tvBtn = document.getElementById('home-tv-btn');
+  if (tvBtn) {
+    var onHome = document.getElementById('s-home').classList.contains('active');
+    tvBtn.style.display = (n === 9 && onHome) ? 'flex' : 'none';
+  }
   try {
     localStorage.setItem('pixelHomeScene', String(n));
   } catch (e) {}

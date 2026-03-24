@@ -285,8 +285,45 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   color: rgba(150,115,55,0.4) !important; font-size: 8px !important;
   line-height: 3 !important;
 }
-/* film button in home-toolbar */
-.home-tool-film { font-size: 18px !important; }
+/* ── MOVIE SCENE TV ICON ── */
+#home-tv-btn {
+  position: absolute !important;
+  left: 50% !important; top: 44% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 15 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+  touch-action: manipulation !important;
+}
+.tv-svg {
+  width: 88px !important; height: 88px !important;
+  animation: tvGlow 2.8s ease-in-out infinite !important;
+}
+@keyframes tvGlow {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(50,120,255,0.35)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(50,140,255,1)) drop-shadow(0 0 6px rgba(120,190,255,0.8)); }
+}
+.tv-screen {
+  animation: tvScreenFlicker 2.8s ease-in-out infinite !important;
+}
+@keyframes tvScreenFlicker {
+  0%, 100% { opacity: 0.12; }
+  45%       { opacity: 0.32; }
+  55%       { opacity: 0.28; }
+}
+#home-tv-btn:active .tv-svg {
+  transform: scale(0.9) !important;
+}
+.tv-label {
+  font-size: 7px !important;
+  color: rgba(130,185,255,0.82) !important;
+  letter-spacing: 2px !important;
+  text-shadow: 0 0 10px rgba(50,120,255,0.7) !important;
+}
 
 /* ── MAP COUNTDOWN ── */
 #map-countdown {
@@ -525,7 +562,6 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   <div class="home-toolbar" style="font-family:-apple-system,sans-serif">
     <button type="button" class="home-tool" onclick="switchTo('s-map')" title="地图">MAP</button>
     <button type="button" class="home-tool" onclick="switchTo('s-bottle')" title="漂流瓶">BTL</button>
-    <button type="button" class="home-tool home-tool-film" onclick="openMoviePanel()" title="电影清单">🎬</button>
     <button type="button" class="home-tool home-tool-heart" id="hbtn" onclick="sendMiss()" title="想念">♥</button>
   </div>
 
@@ -803,6 +839,34 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   </button>
 </nav>
 
+<!-- ══ MOVIE SCENE: pixel TV icon (visible only on state 9) ══ -->
+<div id="home-tv-btn" onclick="openMoviePanel()" style="display:none" title="电影清单">
+  <svg class="tv-svg" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+    <!-- antennas -->
+    <rect x="17" y="1" width="3" height="9" fill="#aaaaaa"/>
+    <rect x="30" y="1" width="3" height="9" fill="#aaaaaa"/>
+    <rect x="16" y="1" width="5" height="3" fill="#cccccc"/>
+    <rect x="29" y="1" width="5" height="3" fill="#cccccc"/>
+    <!-- body -->
+    <rect x="3"  y="9"  width="44" height="30" fill="#2e2e2e"/>
+    <rect x="5"  y="11" width="40" height="26" fill="#1a1a1a"/>
+    <!-- screen -->
+    <rect x="8"  y="13" width="34" height="21" fill="#071428"/>
+    <!-- screen glow rect (CSS animated) -->
+    <rect class="tv-screen" x="8" y="13" width="34" height="21" fill="#3377ee" opacity="0.14"/>
+    <!-- content lines -->
+    <rect x="11" y="17" width="12" height="2" fill="#5599ff" opacity="0.55"/>
+    <rect x="11" y="21" width="18" height="2" fill="#5599ff" opacity="0.38"/>
+    <rect x="11" y="25" width="9"  height="2" fill="#5599ff" opacity="0.25"/>
+    <!-- play triangle -->
+    <polygon points="36,23.5 30,19.5 30,27.5" fill="#88ccff" opacity="0.8"/>
+    <!-- stand -->
+    <rect x="20" y="39" width="10" height="5"  fill="#333333"/>
+    <rect x="14" y="44" width="22" height="3"  fill="#3a3a3a"/>
+  </svg>
+  <span class="tv-label">WATCH LIST</span>
+</div>
+
 <!-- ══ MOVIE LIST PANEL ══ -->
 <div id="movie-panel" style="display:none">
   <div class="mvp-head">
@@ -822,7 +886,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v36</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v37</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
