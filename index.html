@@ -184,6 +184,110 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   display: block !important;
 }
 
+/* ── MOVIE PANEL ── */
+#movie-panel {
+  position: absolute !important;
+  top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+  z-index: 90 !important;
+  background: rgba(12, 8, 3, 0.97) !important;
+  display: flex !important; flex-direction: column !important;
+  transform: translateY(100%) !important;
+  transition: transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94) !important;
+  overflow: hidden !important;
+}
+#movie-panel.open { transform: translateY(0) !important; }
+.mvp-head {
+  display: flex !important; align-items: center !important;
+  padding: 14px 14px 12px !important;
+  border-bottom: 2px solid rgba(245,200,66,0.28) !important;
+  background: rgba(245,200,66,0.04) !important;
+  flex-shrink: 0 !important; gap: 10px !important;
+}
+.mvp-title {
+  flex: 1 !important; font-size: 10px !important;
+  color: #f5c842 !important; letter-spacing: 2px !important;
+}
+.mvp-stats {
+  font-size: 6px !important; color: rgba(180,145,55,0.55) !important;
+  letter-spacing: 1px !important; flex-shrink: 0 !important;
+}
+.mvp-close {
+  background: transparent !important; border: none !important;
+  color: rgba(200,160,60,0.65) !important; font-size: 14px !important;
+  cursor: pointer !important; padding: 2px 4px !important;
+  flex-shrink: 0 !important; line-height: 1 !important;
+}
+.mvp-close:active { color: #ff6b6b !important; }
+.mvp-list {
+  flex: 1 !important; overflow-y: auto !important; padding: 4px 0 !important;
+}
+.mvp-list::-webkit-scrollbar { width: 3px !important; }
+.mvp-list::-webkit-scrollbar-thumb { background: rgba(245,200,66,0.2) !important; border-radius: 2px !important; }
+.mvp-item {
+  display: flex !important; align-items: center !important;
+  padding: 11px 14px !important; gap: 11px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  cursor: pointer !important;
+}
+.mvp-item:active { background: rgba(255,255,255,0.03) !important; }
+.mvp-check {
+  width: 18px !important; height: 18px !important; min-width: 18px !important;
+  border: 2px solid rgba(200,155,50,0.45) !important; border-radius: 3px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 11px !important; color: transparent !important;
+  background: transparent !important; flex-shrink: 0 !important;
+  transition: all 0.15s !important;
+}
+.mvp-item.watched .mvp-check {
+  background: rgba(245,200,66,0.18) !important;
+  border-color: #f5c842 !important; color: #f5c842 !important;
+}
+.mvp-text {
+  flex: 1 !important; font-size: 9px !important;
+  color: rgba(225,195,140,0.9) !important; line-height: 1.7 !important;
+  word-break: break-word !important;
+}
+.mvp-item.watched .mvp-text {
+  text-decoration: line-through !important;
+  color: rgba(150,120,65,0.45) !important;
+}
+.mvp-del {
+  background: transparent !important; border: none !important;
+  color: rgba(140,90,50,0.3) !important; font-size: 14px !important;
+  cursor: pointer !important; padding: 2px 5px !important;
+  flex-shrink: 0 !important; line-height: 1 !important;
+}
+.mvp-del:active { color: rgba(255,80,60,0.75) !important; }
+.mvp-add-row {
+  display: flex !important; gap: 8px !important;
+  padding: 10px 14px !important;
+  border-top: 2px solid rgba(245,200,66,0.14) !important;
+  background: rgba(0,0,0,0.35) !important; flex-shrink: 0 !important;
+}
+.mvp-inp {
+  flex: 1 !important; background: rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(200,155,50,0.38) !important;
+  color: rgba(225,195,140,0.92) !important; font-size: 9px !important;
+  padding: 9px 10px !important; border-radius: 3px !important; outline: none !important;
+}
+.mvp-inp::placeholder { color: rgba(150,115,55,0.4) !important; }
+.mvp-inp:focus { border-color: rgba(245,200,66,0.55) !important; }
+.mvp-addbtn {
+  background: rgba(245,200,66,0.14) !important;
+  border: 1px solid rgba(245,200,66,0.4) !important;
+  color: #f5c842 !important; font-size: 18px !important;
+  padding: 6px 13px !important; cursor: pointer !important;
+  border-radius: 3px !important; flex-shrink: 0 !important; line-height: 1 !important;
+}
+.mvp-addbtn:active { background: rgba(245,200,66,0.28) !important; }
+.mvp-empty {
+  text-align: center !important; padding: 48px 20px !important;
+  color: rgba(150,115,55,0.4) !important; font-size: 8px !important;
+  line-height: 3 !important;
+}
+/* film button in home-toolbar */
+.home-tool-film { font-size: 18px !important; }
+
 /* ── MAP COUNTDOWN ── */
 #map-countdown {
   position: absolute !important;
@@ -421,6 +525,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   <div class="home-toolbar" style="font-family:-apple-system,sans-serif">
     <button type="button" class="home-tool" onclick="switchTo('s-map')" title="地图">MAP</button>
     <button type="button" class="home-tool" onclick="switchTo('s-bottle')" title="漂流瓶">BTL</button>
+    <button type="button" class="home-tool home-tool-film" onclick="openMoviePanel()" title="电影清单">🎬</button>
     <button type="button" class="home-tool home-tool-heart" id="hbtn" onclick="sendMiss()" title="想念">♥</button>
   </div>
 
@@ -698,9 +803,26 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   </button>
 </nav>
 
+<!-- ══ MOVIE LIST PANEL ══ -->
+<div id="movie-panel" style="display:none">
+  <div class="mvp-head">
+    <span class="mvp-title">🎬 MOVIE LIST</span>
+    <div class="mvp-stats" id="mv-stats">0 / 0 WATCHED</div>
+    <button class="mvp-close" onclick="closeMoviePanel()">✕</button>
+  </div>
+  <div class="mvp-list" id="mv-list">
+    <div class="mvp-empty">🎬<br><br>NO MOVIES YET<br><br>ADD SOMETHING TO WATCH !</div>
+  </div>
+  <div class="mvp-add-row">
+    <input class="mvp-inp" id="mv-inp" placeholder="MOVIE TITLE…" maxlength="80"
+      onkeydown="if(event.key==='Enter')addMovie()">
+    <button class="mvp-addbtn" onclick="addMovie()">＋</button>
+  </div>
+</div>
+
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v35</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v36</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
