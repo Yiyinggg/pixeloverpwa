@@ -36,33 +36,41 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 .addbtn { font-size: 24px !important; }
 .nbadge { font-size: 8px !important; }
 
-/* ── STATE NAV: no individual button boxes ── */
+/* ── STATE NAV: vertical left menu ── */
 #home-state-nav {
-  background: rgba(0,0,0,0.55) !important;
-  border: none !important; border-top: 1px solid rgba(255,255,255,0.12) !important;
-  box-shadow: none !important;
-  left: 0 !important; right: 0 !important;
-  gap: 0 !important; justify-content: space-around !important;
-  padding: 8px 4px !important;
+  position: absolute !important;
+  left: 0 !important; top: 50% !important; bottom: auto !important; right: auto !important;
+  transform: translateY(-50%) !important;
+  width: 54px !important;
+  flex-direction: column !important; flex-wrap: nowrap !important;
+  background: rgba(0,0,0,0.62) !important;
+  border: none !important; border-right: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 0 8px 8px 0 !important;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.5) !important;
+  padding: 4px 0 !important; gap: 0 !important;
+  justify-content: center !important;
 }
 #home-state-nav .home-state-btn {
-  background: transparent !important;
-  border: none !important; box-shadow: none !important;
-  color: rgba(200,168,122,0.55) !important;
-  font-size: 8px !important;
-  padding: 6px 8px !important;
+  width: 54px !important; padding: 7px 4px !important;
+  font-size: 6px !important; gap: 3px !important;
   flex-direction: column !important; display: flex !important;
-  align-items: center !important; gap: 4px !important;
+  align-items: center !important;
+  background: transparent !important; border: none !important; box-shadow: none !important;
+  color: rgba(200,168,122,0.5) !important;
 }
 #home-state-nav .home-state-btn.active {
   color: #f5c842 !important;
-  background: transparent !important;
+  background: rgba(245,200,66,0.12) !important;
+  border-left: 2px solid #f5c842 !important;
 }
 .home-state-icon { width: 20px !important; height: 20px !important; min-width: 20px !important; min-height: 20px !important; background-size: contain !important; background-position: center !important; background-repeat: no-repeat !important; }
 .home-icon-forest { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%231a5a1a' d='M10 2 L12 8 L10 8 L12 14 L10 14 L8 8 L6 8 Z'/%3E%3Crect x='8' y='14' width='4' height='4' fill='%235a3020'/%3E%3Crect x='4' y='16' width='3' height='2' fill='%231a5a1a'/%3E%3Crect x='13' y='16' width='3' height='2' fill='%231a5a1a'/%3E%3C/svg%3E") !important; }
-.home-icon-grass { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect y='12' width='20' height='8' fill='%233a8a3a'/%3E%3Cpath fill='%2372c472' d='M2 12 L4 6 L2 12 M6 12 L8 8 L6 12 M10 12 L12 4 L10 12 M14 12 L16 8 L14 12 M18 12 L20 6 L18 12'/%3E%3C/svg%3E") !important; }
 .home-icon-seaside { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect y='14' width='20' height='6' fill='%23f5d890'/%3E%3Cpath fill='%232a5aa0' d='M0 10 Q5 8 10 10 Q15 12 20 10 L20 20 L0 20 Z' opacity='.9'/%3E%3Cpath fill='%234a8ac8' d='M0 12 Q5 10 10 12 Q15 14 20 12 L20 20 L0 20 Z' opacity='.6'/%3E%3Ccircle cx='16' cy='6' r='3' fill='%23f5c842'/%3E%3C/svg%3E") !important; }
 .home-icon-indoor { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23c8a87a' d='M10 2 L2 10 L4 10 L4 18 L16 18 L16 10 L18 10 Z'/%3E%3Crect x='8' y='12' width='4' height='6' fill='%235a3020'/%3E%3Crect x='2' y='10' width='2' height='8' fill='%238a704a'/%3E%3Crect x='16' y='10' width='2' height='8' fill='%238a704a'/%3E%3C/svg%3E") !important; }
+.home-icon-city { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='0' y='9' width='7' height='11' fill='%234a4a7a'/%3E%3Crect x='8' y='4' width='8' height='16' fill='%235e5e9a'/%3E%3Crect x='1' y='11' width='2' height='2' fill='%23a0c8ff'/%3E%3Crect x='4' y='11' width='2' height='2' fill='%23a0c8ff'/%3E%3Crect x='1' y='15' width='2' height='2' fill='%23a0c8ff'/%3E%3Crect x='4' y='15' width='2' height='2' fill='%23a0c8ff'/%3E%3Crect x='9' y='6' width='2' height='2' fill='%23a0c8ff'/%3E%3Crect x='13' y='6' width='2' height='2' fill='%23a0c8ff'/%3E%3Crect x='9' y='10' width='2' height='2' fill='%23a0c8ff'/%3E%3Crect x='13' y='10' width='2' height='2' fill='%23a0c8ff'/%3E%3Crect x='11' y='14' width='3' height='6' fill='%233a3a60'/%3E%3C/svg%3E") !important; }
+.home-icon-snow { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='9' y='0' width='2' height='20' fill='%23b0d8f8'/%3E%3Crect x='0' y='9' width='20' height='2' fill='%23b0d8f8'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23b0d8f8'/%3E%3Crect x='15' y='3' width='2' height='2' fill='%23b0d8f8'/%3E%3Crect x='3' y='15' width='2' height='2' fill='%23b0d8f8'/%3E%3Crect x='15' y='15' width='2' height='2' fill='%23b0d8f8'/%3E%3Crect x='6' y='6' width='2' height='2' fill='%23b0d8f8'/%3E%3Crect x='12' y='6' width='2' height='2' fill='%23b0d8f8'/%3E%3Crect x='6' y='12' width='2' height='2' fill='%23b0d8f8'/%3E%3Crect x='12' y='12' width='2' height='2' fill='%23b0d8f8'/%3E%3C/svg%3E") !important; }
+.home-icon-diving { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' fill='%230a1e40'/%3E%3Crect x='2' y='3' width='2' height='2' fill='%2360a8e0'/%3E%3Crect x='6' y='8' width='2' height='2' fill='%2360a8e0'/%3E%3Crect x='3' y='13' width='2' height='2' fill='%2360a8e0'/%3E%3Crect x='9' y='10' width='6' height='3' fill='%23f0c040'/%3E%3Crect x='15' y='10' width='3' height='3' fill='%23f0c040'/%3E%3Crect x='9' y='11' width='2' height='1' fill='%230a1e40'/%3E%3Crect x='2' y='16' width='16' height='2' fill='%231a3a6a'/%3E%3C/svg%3E") !important; }
+.home-icon-moto { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='2' y='13' width='4' height='4' fill='%23666'/%3E%3Crect x='3' y='14' width='2' height='2' fill='%23222'/%3E%3Crect x='14' y='13' width='4' height='4' fill='%23666'/%3E%3Crect x='15' y='14' width='2' height='2' fill='%23222'/%3E%3Crect x='5' y='9' width='10' height='5' fill='%23c03828'/%3E%3Crect x='7' y='7' width='5' height='4' fill='%23c03828'/%3E%3Crect x='8' y='6' width='4' height='3' fill='%23bbbbbb'/%3E%3Crect x='14' y='8' width='4' height='3' fill='%23888'/%3E%3C/svg%3E") !important; }
 </style>
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -75,7 +83,10 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
     <img class="phone-bg-img active" src="images/home1.png" alt="" data-state="1">
     <img class="phone-bg-img" src="images/home2.png" alt="" data-state="2">
     <img class="phone-bg-img" src="images/home3.png" alt="" data-state="3">
-    <img class="phone-bg-img" src="images/home4-indoor-placeholder.svg" alt="" data-state="4">
+    <img class="phone-bg-img" src="images/home4.png" alt="" data-state="4">
+    <img class="phone-bg-img" src="images/home5.png" alt="" data-state="5">
+    <img class="phone-bg-img" src="images/home6.png" alt="" data-state="6">
+    <img class="phone-bg-img" src="images/home7.png" alt="" data-state="7">
   </div>
 
   <!-- 日历：作为 .phone 直接子元素，仅 HOME 时显示 -->
@@ -308,28 +319,40 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 <div id="gtst">MSG</div>
 
 <!-- 状态切换按钮：.phone 直接子元素，避免被 #s-home overflow:hidden 裁剪 -->
-<nav id="home-state-nav" class="home-state-nav" aria-label="home scene" style="position:absolute;bottom:72px;left:0;right:0;z-index:25;display:flex;">
-  <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)" title="FOREST">
+<nav id="home-state-nav" class="home-state-nav" aria-label="home scene" style="display:flex;">
+  <button type="button" class="home-state-btn active" data-state="1" onclick="setHomeState(1)">
     <span class="home-state-icon home-icon-forest"></span>
     <span class="home-state-label">FOREST</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)" title="MEADOW">
-    <span class="home-state-icon home-icon-grass"></span>
-    <span class="home-state-label">MEADOW</span>
-  </button>
-  <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)" title="SEASIDE">
+  <button type="button" class="home-state-btn" data-state="2" onclick="setHomeState(2)">
     <span class="home-state-icon home-icon-seaside"></span>
     <span class="home-state-label">SEASIDE</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)" title="INDOOR">
+  <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)">
     <span class="home-state-icon home-icon-indoor"></span>
     <span class="home-state-label">INDOOR</span>
+  </button>
+  <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)">
+    <span class="home-state-icon home-icon-city"></span>
+    <span class="home-state-label">CITY</span>
+  </button>
+  <button type="button" class="home-state-btn" data-state="5" onclick="setHomeState(5)">
+    <span class="home-state-icon home-icon-snow"></span>
+    <span class="home-state-label">SNOW</span>
+  </button>
+  <button type="button" class="home-state-btn" data-state="6" onclick="setHomeState(6)">
+    <span class="home-state-icon home-icon-diving"></span>
+    <span class="home-state-label">DIVING</span>
+  </button>
+  <button type="button" class="home-state-btn" data-state="7" onclick="setHomeState(7)">
+    <span class="home-state-icon home-icon-moto"></span>
+    <span class="home-state-label">MOTO</span>
   </button>
 </nav>
 
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v24</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v25</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){

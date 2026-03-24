@@ -40,10 +40,13 @@ var HOME_BG_FILES = [
   'images/home1.png',
   'images/home2.png',
   'images/home3.png',
-  'images/home4-indoor-placeholder.svg'
+  'images/home4.png',
+  'images/home5.png',
+  'images/home6.png',
+  'images/home7.png'
 ];
 
-var HOME_LABELS = ['FOREST', 'MEADOW', 'SEASIDE', 'INDOOR'];
+var HOME_LABELS = ['FOREST', 'SEASIDE', 'INDOOR', 'CITY', 'SNOW', 'DIVING', 'MOTO'];
 
 /** 换素材后改成 2、3… 即可让浏览器重新拉图片 */
 var HOME_ASSET_V = '2';
@@ -69,7 +72,7 @@ function applyHomeLabels() {
 
 window.setHomeState = function(n) {
   n = parseInt(n, 10);
-  if (n < 1 || n > 4) return;
+  if (n < 1 || n > 7) return;
   var root = document.getElementById('s-home');
   if (!root) return;
   root.setAttribute('data-home-state', String(n));
