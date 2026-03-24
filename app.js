@@ -27,6 +27,7 @@ window.switchTo = function(id) {
   if (id === 's-map') {
     if (!mapReady) { mapReady = true; }
     initLeaflet();
+    updateMeetCountdown();
   }
   if (id === 's-home') {
     refreshHomeScreenIfNewDay();
@@ -428,6 +429,83 @@ function showToast(msg) {
 document.getElementById('srch').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') window.doSearch();
 });
+
+/* ══ BG SPARKLE: twinkling pixel dots on the background ══ */
+(function startBgSparkle() {
+  var bg = document.getElementById('phone-home-bg');
+  if (!bg) return;
+  function spawn() {
+    var dot = document.createElement('div');
+    var size = Math.random() < 0.55 ? 2 : 3;
+    var warm = Math.random() < 0.55;
+    dot.style.cssText = [
+      'position:absolute', 'pointer-events:none', 'z-index:5',
+      'width:' + size + 'px', 'height:' + size + 'px', 'border-radius:1px',
+      'left:' + (4 + Math.random() * 90) + '%',
+      'top:'  + (4 + Math.random() * 82) + '%',
+      'background:' + (warm ? 'rgba(255,235,140,0.92)' : 'rgba(255,255,255,0.95)')
+    ].join(';');
+    var dur = (0.6 + Math.random() * 0.9).toFixed(2);
+    dot.style.animation = 'sparkDot ' + dur + 's ease-in-out forwards';
+    bg.appendChild(dot);
+    dot.addEventListener('animationend', function() { if (dot.parentNode) dot.remove(); });
+  }
+  setInterval(function() {
+    var n = 3 + Math.floor(Math.random() * 4);
+    for (var i = 0; i < n; i++) setTimeout(spawn, Math.random() * 350);
+  }, 480);
+})();
+
+/* ══ MAP COUNTDOWN ══ */
+window.toggleMapCountdown = function() {
+  var body = document.getElementById('mcd-body');
+  var caret = document.getElementById('mcd-caret');
+  if (!body) return;
+  var open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  if (caret) caret.classList.toggle('closed', open);
+};
+
+window.editMeetDate = function() {
+  var edit = document.getElementById('mcd-edit');
+  var btn  = document.getElementById('mcd-edit-btn');
+  if (!edit) return;
+  var showing = edit.style.display !== 'none';
+  edit.style.display = showing ? 'none' : 'flex';
+  if (btn) btn.textContent = showing ? '✎ SET DATE' : '✕ CANCEL';
+};
+
+window.saveMeetDate = function() {
+  var inp = document.getElementById('mcd-date-input');
+  if (!inp || !inp.value) return;
+  try { localStorage.setItem('pixelMeetDate', inp.value); } catch(e) {}
+  window.editMeetDate();
+  updateMeetCountdown();
+};
+
+function updateMeetCountdown() {
+  var dEl = document.getElementById('mcd-days');
+  var hEl = document.getElementById('mcd-hrs');
+  var mEl = document.getElementById('mcd-mins');
+  if (!dEl) return;
+  var ds = '';
+  try { ds = localStorage.getItem('pixelMeetDate') || ''; } catch(e) {}
+  if (!ds) { dEl.textContent = hEl.textContent = mEl.textContent = '--'; return; }
+  var target = new Date(ds + 'T00:00:00');
+  var diff = target - new Date();
+  if (diff <= 0) {
+    dEl.textContent = hEl.textContent = mEl.textContent = '00'; return;
+  }
+  var days = Math.floor(diff / 86400000);
+  var hrs  = Math.floor((diff % 86400000) / 3600000);
+  var mins = Math.floor((diff % 3600000)  / 60000);
+  dEl.textContent = String(days).padStart(2, '0');
+  hEl.textContent = String(hrs).padStart(2, '0');
+  mEl.textContent = String(mins).padStart(2, '0');
+}
+
+setInterval(updateMeetCountdown, 30000);
+updateMeetCountdown();
 
 /* ── PWA：注册后主动检查更新（配合 sw 网络优先） ── */
 if ('serviceWorker' in navigator) {

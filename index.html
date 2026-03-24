@@ -48,10 +48,11 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   border-top: 1px solid rgba(255,255,255,0.12) !important;
   border-radius: 0 !important;
   box-shadow: 0 -3px 12px rgba(0,0,0,0.45) !important;
-  padding: 0 12px !important; gap: 0 !important;
+  padding: 0 14px !important; gap: 0 !important;
   align-items: stretch !important;
   max-height: none !important;
   scrollbar-width: none !important;
+  z-index: 20 !important;
 }
 #home-state-nav::-webkit-scrollbar { height: 0 !important; width: 0 !important; }
 #home-state-nav .home-state-btn {
@@ -83,28 +84,42 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 .home-icon-movie { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='6' width='18' height='12' fill='%23222'/%3E%3Crect x='1' y='4' width='18' height='4' fill='%23eeeeee'/%3E%3Crect x='2' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='7' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='12' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='4' y='10' width='5' height='6' fill='%230a0a40'/%3E%3Crect x='11' y='10' width='5' height='6' fill='%230a0a40'/%3E%3Crect x='6' y='11' width='1' height='4' fill='%23f5c842'/%3E%3Crect x='13' y='11' width='1' height='4' fill='%23f5c842'/%3E%3C/svg%3E") !important; }
 .home-icon-adventure { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' fill='%23204860'/%3E%3Crect x='8' y='2' width='2' height='2' fill='%23ffffff'/%3E%3Crect x='6' y='4' width='6' height='2' fill='%23d0e8f8'/%3E%3Crect x='4' y='6' width='8' height='2' fill='%23888888'/%3E%3Crect x='3' y='8' width='10' height='2' fill='%23666666'/%3E%3Crect x='2' y='10' width='12' height='2' fill='%23446644'/%3E%3Crect x='0' y='12' width='20' height='6' fill='%23335533'/%3E%3Crect x='13' y='8' width='5' height='8' fill='%23446644'/%3E%3C/svg%3E") !important; }
 
-/* ── BG SHIMMER: light sweep + brightness/saturation pulse ── */
+/* ── BG SHIMMER: light sweep + brightness/saturation pulse + sparkle ── */
 .phone-bg-img.active {
-  animation: home-bg-kenburns 20s ease-in-out infinite alternate, bgPulse 5s ease-in-out infinite !important;
+  animation: home-bg-kenburns 20s ease-in-out infinite alternate, bgPulse 4s ease-in-out infinite !important;
 }
 @keyframes bgPulse {
   0%, 100% { filter: brightness(1)    saturate(1); }
-  50%       { filter: brightness(1.09) saturate(1.15); }
+  40%       { filter: brightness(1.18) saturate(1.28) contrast(1.06); }
+  60%       { filter: brightness(1.22) saturate(1.32) contrast(1.08); }
 }
+/* wide diagonal sweep */
 #phone-home-bg::after {
   content: '' !important;
   position: absolute !important;
   top: 0 !important; left: 0 !important;
-  width: 45% !important; height: 100% !important;
+  width: 55% !important; height: 100% !important;
   z-index: 4 !important; pointer-events: none !important;
-  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.09) 50%, transparent 80%) !important;
-  animation: bgSweep 11s ease-in-out infinite !important;
+  background: linear-gradient(108deg,
+    transparent 15%,
+    rgba(255,255,255,0.04) 35%,
+    rgba(255,255,255,0.16) 50%,
+    rgba(255,255,255,0.04) 65%,
+    transparent 85%) !important;
+  animation: bgSweep 9s ease-in-out infinite !important;
 }
 @keyframes bgSweep {
-  0%, 100% { transform: translateX(-130%) skewX(-12deg); opacity: 0; }
-  4%        { opacity: 1; }
-  28%       { transform: translateX(320%) skewX(-12deg); opacity: 1; }
-  33%       { opacity: 0; transform: translateX(370%) skewX(-12deg); }
+  0%, 100% { transform: translateX(-140%) skewX(-14deg); opacity: 0; }
+  5%        { opacity: 1; }
+  30%       { transform: translateX(260%) skewX(-14deg); opacity: 1; }
+  36%       { opacity: 0; transform: translateX(300%) skewX(-14deg); }
+}
+/* sparkle dot animation */
+@keyframes sparkDot {
+  0%   { opacity: 0; transform: scale(0); }
+  20%  { opacity: 1; transform: scale(2.2); }
+  60%  { opacity: 0.85; transform: scale(1.4); }
+  100% { opacity: 0; transform: scale(0.2); }
 }
 
 /* ── DAILY POEM: sticky note aligned with calendar top ── */
@@ -168,6 +183,88 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
   word-break: break-word !important;
   display: block !important;
 }
+
+/* ── MAP COUNTDOWN ── */
+#map-countdown {
+  position: absolute !important;
+  bottom: 72px !important; left: 6px !important; right: 6px !important;
+  background: rgba(10,8,4,0.9) !important;
+  border: 2px solid rgba(180,140,60,0.65) !important;
+  border-radius: 4px !important;
+  z-index: 40 !important;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,220,100,0.08) !important;
+  overflow: hidden !important;
+}
+.mcd-hd {
+  display: flex !important; align-items: center !important;
+  padding: 8px 12px !important; cursor: pointer !important; gap: 8px !important;
+  user-select: none !important; -webkit-user-select: none !important;
+}
+.mcd-hd-icon { font-size: 13px !important; }
+.mcd-hd-title {
+  flex: 1 !important; font-size: 9px !important;
+  color: #f5c842 !important; letter-spacing: 2px !important;
+}
+.mcd-hd-caret {
+  font-size: 8px !important; color: rgba(200,160,60,0.7) !important;
+  display: inline-block !important;
+  transition: transform 0.25s !important;
+}
+.mcd-hd-caret.closed { transform: rotate(180deg) !important; }
+#mcd-body {
+  border-top: 1px solid rgba(180,140,60,0.25) !important;
+  padding: 6px 12px 10px !important;
+}
+.mcd-nums {
+  display: flex !important; align-items: center !important;
+  justify-content: center !important; gap: 4px !important;
+  padding: 6px 0 8px !important;
+}
+.mcd-cell {
+  display: flex !important; flex-direction: column !important;
+  align-items: center !important; min-width: 48px !important;
+}
+.mcd-cell > span {
+  font-size: 22px !important; color: #f5c842 !important;
+  line-height: 1 !important;
+  text-shadow: 0 0 12px rgba(245,200,66,0.7), 0 0 4px rgba(245,200,66,0.5) !important;
+}
+.mcd-unit {
+  font-size: 5px !important; color: rgba(200,160,60,0.6) !important;
+  margin-top: 3px !important; letter-spacing: 1px !important;
+}
+.mcd-sep {
+  font-size: 18px !important; color: rgba(180,140,60,0.45) !important;
+  margin-bottom: 10px !important;
+}
+.mcd-editbtn {
+  display: block !important; margin: 0 auto !important;
+  background: transparent !important;
+  border: 1px solid rgba(180,140,60,0.35) !important;
+  color: rgba(200,160,60,0.65) !important; font-size: 7px !important;
+  padding: 4px 10px !important; cursor: pointer !important;
+  letter-spacing: 1px !important; border-radius: 2px !important;
+}
+.mcd-editbtn:active { background: rgba(180,140,60,0.12) !important; }
+#mcd-edit {
+  display: flex !important; align-items: center !important;
+  justify-content: center !important; gap: 8px !important;
+  margin-bottom: 8px !important;
+}
+.mcd-date-inp {
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(180,140,60,0.5) !important;
+  color: #e0c870 !important; font-size: 8px !important;
+  padding: 4px 6px !important; border-radius: 2px !important;
+}
+.mcd-save {
+  background: rgba(180,140,60,0.15) !important;
+  border: 1px solid rgba(180,140,60,0.6) !important;
+  color: #f5c842 !important; font-size: 7px !important;
+  padding: 4px 10px !important; cursor: pointer !important;
+  border-radius: 2px !important;
+}
+.mcd-save:active { background: rgba(180,140,60,0.3) !important; }
 
 /* ══ TAP INTERACTION: hearts · stars · bubble · ripple · combo ══ */
 
@@ -394,6 +491,29 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
   <div id="mtoast">MSG</div>
 
+  <!-- Countdown to next meet -->
+  <div id="map-countdown">
+    <div class="mcd-hd" onclick="toggleMapCountdown()">
+      <span class="mcd-hd-icon">⏳</span>
+      <span class="mcd-hd-title">NEXT MEET</span>
+      <span id="mcd-caret" class="mcd-hd-caret closed">▲</span>
+    </div>
+    <div id="mcd-body" style="display:none">
+      <div class="mcd-nums">
+        <div class="mcd-cell"><span id="mcd-days">--</span><div class="mcd-unit">DAYS</div></div>
+        <div class="mcd-sep">:</div>
+        <div class="mcd-cell"><span id="mcd-hrs">--</span><div class="mcd-unit">HRS</div></div>
+        <div class="mcd-sep">:</div>
+        <div class="mcd-cell"><span id="mcd-mins">--</span><div class="mcd-unit">MIN</div></div>
+      </div>
+      <div id="mcd-edit" style="display:none">
+        <input type="date" id="mcd-date-input" class="mcd-date-inp">
+        <button onclick="saveMeetDate()" class="mcd-save">SET ✓</button>
+      </div>
+      <button onclick="editMeetDate()" id="mcd-edit-btn" class="mcd-editbtn">✎ SET DATE</button>
+    </div>
+  </div>
+
 </div><!-- /s-map -->
 
 
@@ -580,7 +700,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v34</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v35</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
