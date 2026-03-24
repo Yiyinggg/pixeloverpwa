@@ -41,20 +41,19 @@ window.switchTo = function(id) {
 ══════════════════════════════════ */
 
 var HOME_BG_FILES = [
-  'images/carcamping.png',   // 1 FOREST
-  'images/beachparty.png',   // 2 SEASIDE
-  '',                        // 3 INDOOR  (no image yet)
-  'images/citywalk.png',     // 4 CITY
-  '',                        // 5 SNOW    (no image yet)
-  'images/diving.png',       // 6 DIVING
-  'images/citymotor.png',    // 7 MOTO
-  'images/driving.png',      // 8 DRIVE
-  'images/working.png',      // 9 WORK
-  '',                        // 10 SLEEP  (no image yet)
-  ''                         // 11 MOVIE  (no image yet)
+  'images/carcamping.png',   // 1  FOREST
+  'images/beachparty.png',   // 2  SEASIDE
+  'images/citywalk.png',     // 3  CITY
+  'images/diving.png',       // 4  DIVING
+  'images/citymotor.png',    // 5  MOTO
+  'images/driving.png',      // 6  DRIVE
+  'images/working.png',      // 7  WORK
+  'images/sleep.png',        // 8  SLEEP
+  'images/movie.png',        // 9  MOVIE
+  'images/adventure.png'     // 10 ADVENTURE
 ];
 
-var HOME_LABELS = ['FOREST', 'SEASIDE', 'INDOOR', 'CITY', 'SNOW', 'DIVING', 'MOTO', 'DRIVE', 'WORK', 'SLEEP', 'MOVIE'];
+var HOME_LABELS = ['FOREST', 'SEASIDE', 'CITY', 'DIVING', 'MOTO', 'DRIVE', 'WORK', 'SLEEP', 'MOVIE', 'ADVENTURE'];
 
 var DAILY_POEMS = [
   'I carry your heart with me.',
@@ -114,7 +113,7 @@ function applyHomeLabels() {
 
 window.setHomeState = function(n) {
   n = parseInt(n, 10);
-  if (n < 1 || n > 11) return;
+  if (n < 1 || n > 10) return;
   var root = document.getElementById('s-home');
   if (!root) return;
   root.setAttribute('data-home-state', String(n));
@@ -166,7 +165,7 @@ function initHomeScreen() {
   try {
     saved = parseInt(localStorage.getItem('pixelHomeScene'), 10) || 1;
   } catch (e) {}
-  if (saved < 1 || saved > 11) saved = 1;
+  if (saved < 1 || saved > 10) saved = 1;
   setHomeState(saved);
 }
 

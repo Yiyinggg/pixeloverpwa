@@ -81,6 +81,7 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 .home-icon-work { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='2' y='4' width='16' height='10' fill='%23606060'/%3E%3Crect x='3' y='5' width='14' height='8' fill='%23101a10'/%3E%3Crect x='4' y='7' width='7' height='1' fill='%2340c060'/%3E%3Crect x='4' y='9' width='5' height='1' fill='%2340c060'/%3E%3Crect x='4' y='11' width='6' height='1' fill='%2340c060'/%3E%3Crect x='0' y='14' width='20' height='3' fill='%23505050'/%3E%3Crect x='7' y='14' width='6' height='2' fill='%23404040'/%3E%3C/svg%3E") !important; }
 .home-icon-sleep { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' fill='%230a0a1e'/%3E%3Crect x='7' y='2' width='6' height='2' fill='%23f5d060'/%3E%3Crect x='5' y='4' width='8' height='2' fill='%23f5d060'/%3E%3Crect x='4' y='6' width='9' height='2' fill='%23f5d060'/%3E%3Crect x='4' y='8' width='8' height='2' fill='%23f5d060'/%3E%3Crect x='5' y='10' width='6' height='2' fill='%23f5d060'/%3E%3Crect x='7' y='12' width='4' height='2' fill='%23f5d060'/%3E%3Crect x='9' y='4' width='5' height='8' fill='%230a0a1e'/%3E%3Crect x='15' y='2' width='2' height='2' fill='%23ffffff'/%3E%3Crect x='14' y='7' width='2' height='2' fill='%23aaaaff'/%3E%3Crect x='3' y='15' width='2' height='2' fill='%23ffffff'/%3E%3C/svg%3E") !important; }
 .home-icon-movie { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='6' width='18' height='12' fill='%23222'/%3E%3Crect x='1' y='4' width='18' height='4' fill='%23eeeeee'/%3E%3Crect x='2' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='7' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='12' y='4' width='3' height='3' fill='%23222'/%3E%3Crect x='4' y='10' width='5' height='6' fill='%230a0a40'/%3E%3Crect x='11' y='10' width='5' height='6' fill='%230a0a40'/%3E%3Crect x='6' y='11' width='1' height='4' fill='%23f5c842'/%3E%3Crect x='13' y='11' width='1' height='4' fill='%23f5c842'/%3E%3C/svg%3E") !important; }
+.home-icon-adventure { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' fill='%23204860'/%3E%3Crect x='8' y='2' width='2' height='2' fill='%23ffffff'/%3E%3Crect x='6' y='4' width='6' height='2' fill='%23d0e8f8'/%3E%3Crect x='4' y='6' width='8' height='2' fill='%23888888'/%3E%3Crect x='3' y='8' width='10' height='2' fill='%23666666'/%3E%3Crect x='2' y='10' width='12' height='2' fill='%23446644'/%3E%3Crect x='0' y='12' width='20' height='6' fill='%23335533'/%3E%3Crect x='13' y='8' width='5' height='8' fill='%23446644'/%3E%3C/svg%3E") !important; }
 
 
 /* ── DAILY POEM: sticky note aligned with calendar top ── */
@@ -256,17 +257,16 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
 
   <!-- 背景层：与屏幕同级，在 .phone 下铺满内容区 -->
   <div class="phone-bg" id="phone-home-bg" aria-hidden="true">
-    <img class="phone-bg-img active" src="images/carcamping.png"  alt="" data-state="1"><!-- FOREST -->
-    <img class="phone-bg-img"        src="images/beachparty.png"  alt="" data-state="2"><!-- SEASIDE -->
-    <!-- state 3 INDOOR: no image yet -->
-    <img class="phone-bg-img"        src="images/citywalk.png"    alt="" data-state="4"><!-- CITY -->
-    <!-- state 5 SNOW: no image yet -->
-    <img class="phone-bg-img"        src="images/diving.png"      alt="" data-state="6"><!-- DIVING -->
-    <img class="phone-bg-img"        src="images/citymotor.png"   alt="" data-state="7"><!-- MOTO -->
-    <img class="phone-bg-img"        src="images/driving.png"     alt="" data-state="8"><!-- DRIVE -->
-    <img class="phone-bg-img"        src="images/working.png"     alt="" data-state="9"><!-- WORK -->
-    <!-- state 10 SLEEP: no image yet -->
-    <!-- state 11 MOVIE: no image yet -->
+    <img class="phone-bg-img active" src="images/carcamping.png"  alt="" data-state="1">
+    <img class="phone-bg-img"        src="images/beachparty.png"  alt="" data-state="2">
+    <img class="phone-bg-img"        src="images/citywalk.png"    alt="" data-state="3">
+    <img class="phone-bg-img"        src="images/diving.png"      alt="" data-state="4">
+    <img class="phone-bg-img"        src="images/citymotor.png"   alt="" data-state="5">
+    <img class="phone-bg-img"        src="images/driving.png"     alt="" data-state="6">
+    <img class="phone-bg-img"        src="images/working.png"     alt="" data-state="7">
+    <img class="phone-bg-img"        src="images/sleep.png"       alt="" data-state="8">
+    <img class="phone-bg-img"        src="images/movie.png"       alt="" data-state="9">
+    <img class="phone-bg-img"        src="images/adventure.png"   alt="" data-state="10">
   </div>
 
   <!-- 日历：作为 .phone 直接子元素，仅 HOME 时显示 -->
@@ -522,46 +522,42 @@ html, body { height: 100dvh !important; overflow: hidden !important; }
     <span class="home-state-label">SEASIDE</span>
   </button>
   <button type="button" class="home-state-btn" data-state="3" onclick="setHomeState(3)">
-    <span class="home-state-icon home-icon-indoor"></span>
-    <span class="home-state-label">INDOOR</span>
-  </button>
-  <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)">
     <span class="home-state-icon home-icon-city"></span>
     <span class="home-state-label">CITY</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="5" onclick="setHomeState(5)">
-    <span class="home-state-icon home-icon-snow"></span>
-    <span class="home-state-label">SNOW</span>
-  </button>
-  <button type="button" class="home-state-btn" data-state="6" onclick="setHomeState(6)">
+  <button type="button" class="home-state-btn" data-state="4" onclick="setHomeState(4)">
     <span class="home-state-icon home-icon-diving"></span>
     <span class="home-state-label">DIVING</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="7" onclick="setHomeState(7)">
+  <button type="button" class="home-state-btn" data-state="5" onclick="setHomeState(5)">
     <span class="home-state-icon home-icon-moto"></span>
     <span class="home-state-label">MOTO</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="8" onclick="setHomeState(8)">
+  <button type="button" class="home-state-btn" data-state="6" onclick="setHomeState(6)">
     <span class="home-state-icon home-icon-drive"></span>
     <span class="home-state-label">DRIVE</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="9" onclick="setHomeState(9)">
+  <button type="button" class="home-state-btn" data-state="7" onclick="setHomeState(7)">
     <span class="home-state-icon home-icon-work"></span>
     <span class="home-state-label">WORK</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="10" onclick="setHomeState(10)">
+  <button type="button" class="home-state-btn" data-state="8" onclick="setHomeState(8)">
     <span class="home-state-icon home-icon-sleep"></span>
     <span class="home-state-label">SLEEP</span>
   </button>
-  <button type="button" class="home-state-btn" data-state="11" onclick="setHomeState(11)">
+  <button type="button" class="home-state-btn" data-state="9" onclick="setHomeState(9)">
     <span class="home-state-icon home-icon-movie"></span>
     <span class="home-state-label">MOVIE</span>
+  </button>
+  <button type="button" class="home-state-btn" data-state="10" onclick="setHomeState(10)">
+    <span class="home-state-icon home-icon-adventure"></span>
+    <span class="home-state-label">ADVENTURE</span>
   </button>
 </nav>
 
 </div><!-- .phone -->
 
-<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v32</div>
+<div id="ver-badge" style="position:fixed;top:8px;left:8px;background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;font-size:14px;z-index:99999;border-radius:4px;font-family:monospace;pointer-events:none;border:2px solid #0f0">v33</div>
 <div id="fresh-badge" style="position:fixed;top:10px;right:10px;background:#2a6a2a;color:#fff;padding:8px 12px;font-size:12px;z-index:99999;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none"></div>
 <script>
 (function(){
