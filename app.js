@@ -39,17 +39,17 @@ window.switchTo = function(id) {
 ══════════════════════════════════ */
 
 var HOME_BG_FILES = [
-  'images/home1.png',
-  'images/home2.png',
-  'images/home3.png',
-  'images/home4.png',
-  'images/home5.png',
-  'images/home6.png',
-  'images/home7.png',
-  'images/home8.png',
-  'images/home9.png',
-  'images/home10.png',
-  'images/home11.png'
+  'images/carcamping.png',   // 1 FOREST
+  'images/beachparty.png',   // 2 SEASIDE
+  '',                        // 3 INDOOR  (no image yet)
+  'images/citywalk.png',     // 4 CITY
+  '',                        // 5 SNOW    (no image yet)
+  'images/diving.png',       // 6 DIVING
+  'images/citymotor.png',    // 7 MOTO
+  'images/driving.png',      // 8 DRIVE
+  'images/working.png',      // 9 WORK
+  '',                        // 10 SLEEP  (no image yet)
+  ''                         // 11 MOVIE  (no image yet)
 ];
 
 var HOME_LABELS = ['FOREST', 'SEASIDE', 'INDOOR', 'CITY', 'SNOW', 'DIVING', 'MOTO', 'DRIVE', 'WORK', 'SLEEP', 'MOVIE'];
